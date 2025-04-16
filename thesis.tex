@@ -1,80 +1,736 @@
-\documentclass[a4paper,12pt,customfont,numbered,index]{PhDThesisPSnPDF}
+% ******************************* UnB - Departamento de Matemática **************************
+% Por favor, dê uma olhada no arquivo LEIAME.md para mais informações sobre como usar o template
+
+\documentclass[a4paper,12pt,times,numbered,index,custommargin, oneside]{PhDThesisPSnPDF}
+
+\everymath{\displaystyle}
+\usepackage{float}
+\usepackage{endnotes}
+\usepackage{lastpage}
+\usepackage[labelsep=period]{caption}
+\usepackage{xparse}
+\usepackage{epigraph}
+\usepackage[labelsep=period]{caption}
+\usepackage{bm}
+\usepackage[absolute,overlay]{textpos}
+\allowdisplaybreaks
+\usepackage{textcomp}
+\usepackage{cleveref}
+\crefname{deff}{}{definitions}
+\crefname{exem}{}{exemplos}
+\crefname{col}{}{corolários}
+\crefname{item}{}{itens}
+\creflabelformat{item}{#2{\bf{\color{blue}(#1)}}#3}
+\crefname{equation}{}{equações}
+\creflabelformat{equation}{#2{\bf{\color{blue}(#1)}}#3}
+\crefname{teorema}{}{teoremas}
+\creflabelformat{teorema}{#2\bf{\color{navybluegalaxy}(T.#1)}#3}
+\crefname{oobs}{observação}{observações}
+\creflabelformat{oobs}{#2\bf{\color{violet}(O.#1)}#3}
+\crefname{pergunta}{}{perguntas}
+\creflabelformat{pergunta}{#2\bf{\color{gal}(P.#1)}#3}
+\crefname{lema}{}{lemas}
+\creflabelformat{lema}{#2\bf{\color{gal}(L.#1)}#3}
+\crefname{proposicao}{}{proposições}
+\creflabelformat{deff}{#2\bf{\color{cyan}(D.#1)}#3}
+\creflabelformat{exem}{#2\bf{\color{BlueViolet}(E.#1)}#3}
+\creflabelformat{col}{#2\bf{\color{Aquamarine}(C.#1)}#3}
+\creflabelformat{proposicao}{#2{\bf\color{Sepia}(P.#1)}#3}
+%\renewcommand{\theenumi}{\Alph{enumi}}
+\usepackage{mathrsfs}
+%\definecolor{mynicegreen}{RGB}{0, 111, 0}
+\definecolor{bluegalaxy}{RGB}{0, 101, 164}
+\definecolor{goldgalaxy}{RGB}{255, 210, 0}
+\usepackage{lipsum}  
+\usepackage{hyperref}
+\hypersetup{
+	pagebackref=true,
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=gal,
+    citecolor = teal  %choose some color if you want links to stand out
+}
+
+\newcommand{\mycitep}[1]{\textbf{\citep{#1}}}
+\newcommand{\mycitepp}[1]{\textbf{\citep{#1}}}
+
+\usepackage{etoolbox}
+
+\usepackage{titlecaps}
+
+\makeatletter
+\patchcmd{\f@nch@head}{\rlap}{\color{navybluegalaxy}\rlap}{}{}
+%\patchcmd{\headrule}{\hrule}{\color{TealBlue}\hrule}{}{}
+\patchcmd{\f@nch@foot}{\rlap}{\color{navybluegalaxy}\rlap}{}{}
+%\patchcmd{\footrule}{\hrule}{\color{pink}\hrule}{}{}
+\makeatother
+
+
+
+
+
+\newcommand{\quotes}[1]{``#1''}
+\usepackage{tikz}
+\usetikzlibrary{shadows}
+\usepackage{graphicx}
+\usepackage[percent]{overpic}
+
+%\usepackage{sectsty}
+%\chapterfont{\color{gal}}  % sets colour of chapters
+%\sectionfont{\color{gal}} 
+
+
+
+
+\newcommand\xleftrightarrow[1]{%
+  \mathbin{\ooalign{$\,\xrightarrow{#1}$\cr$\xleftarrow{\hphantom{#1}}\,$}}
+}
+
+\usepackage{calc}
+\newlength{\depthofsumsign}
+\setlength{\depthofsumsign}{\depthof{$\sum$}}
+\newlength{\totalheightofsumsign}
+\newlength{\heightanddepthofargument}
+
+
+
+\makeatletter
+\renewcommand\@endpart{\vfil
+              \if@twoside
+                \null
+                \thispagestyle{empty}%
+                \newpage
+              \fi
+              \if@tempswa
+                \twocolumn
+              \fi}
+\makeatother
+
+
+\newcommand{\nsum}[1][1.4]{% only for \displaystyle
+    \mathop{%
+        \raisebox
+            {-#1\depthofsumsign+1\depthofsumsign}
+            {\scalebox
+                {#1}
+                {$\displaystyle\sum$}%
+            }
+    }
+}
+\newcommand{\resum}[1]{%
+    \def\s{#1}
+    \mathop{
+        \mathpalette\resumaux{#1}
+    }
+}
+
+\newcommand{\resumaux}[2]{% internally
+    \sbox0{$#1#2$}
+    \sbox1{$#1\sum$}
+    \setlength{\heightanddepthofargument}{\wd0+\dp0}
+    \setlength{\totalheightofsumsign}{\wd1+\dp1}
+    \def\quot{\DivideLengths{\heightanddepthofargument}{\totalheightofsumsign}}
+    \nsum[\quot]%
+}
+
+% http://tex.stackexchange.com/a/6424/16595
+\makeatletter
+\newcommand*{\DivideLengths}[2]{%
+  \strip@pt\dimexpr\number\numexpr\number\dimexpr#1\relax*65536/\number\dimexpr#2\relax\relax sp\relax
+}
+\makeatother
+
+%\usepackage[a4paper,bottom=1in,top=1in,left=0.3in,right=0.3in]{geometry}
+% ******************************************************************************
+% ******************************* Opções Comuns ********************************
+% *********************** Veja o  LEIAME para mais detalhes ********************
+% ******************************************************************************
+
+% `a4paper'(A universidade de Brasília recomenda páginas de tamanho a4 - (opção
+% configurada por padrão)
+
+% `oneside' ou `twoside'(padrão): Imprimir em ambos os lados (twoside) ou em um
+% lado somente '(oneside)
+
+% `print': Use `print' para configurações próprias à impressão - configurações de
+% margem e capítulos. Deixar essa opção em branco ativa a versão Online
+% `online': Ativa configurações para versão Online, utilize essa opção para enviar
+% seu trabalho à Biblioteca
+
+% `index': Para ativar índice Remissivo ao final da Dissertação
+
+% `draftclassic': Para modo rascunho, sem carregar nenhuma imagem
+
+% `draft': Modo rascunho especial com números de linhas, imagens, e marca d'agua
+% com data e texto personalizado. (Veja o arquivo de Prêambulo para configuração)
+% IMPORTANTE: Depois de ativado o modo rascunho, ao desativá-lo, o projeto pode
+% não compilar. Para resolver este problema basta limpar os arquivos temporários.
+% A maioria dos editores de latex já tem esse recurso implementado.
+
+% `chapter`: Use essa opção para ativar somente um capítulo específico e suas referências
+%  Útil para correções e revisões
+
+% ********************** Escolhendo estilo de Bibliografia ***********************
+%
+% `authoryear': Para o formato de autor-ano - ex., Deivid Vale (2018)
+%
+% `numbered': (Opção Padrão) Para citações enumeradas e ordenadas por nome e.g., [1,5,2]
+%
+% `custombib': Definir seu próprio estilo de citação no arquivo `preamble.tex'.
+%              `\RequirePackage[square, sort, numbers, authoryear]{natbib}'.
+%
 
 % ********************************** Preamble **********************************
-% Preamble: Contains packages and user-defined commands and settings
-\input{Preamble/preamble}
+% Preamble: Configurações somente do template
+%\let\cleardoublepage\clearpage
+\input{preamble/preamble}
+% Config: Arquivo de configurações específicas de seu trabalho
+%\let\cleardoublepage\clearpage
+\input{preamble/config.tex}
+% Notation: Arquivo de configuração de comandos de notação. Isso facilita a escrita,
+% veja alguns exemplos no arquivo.
+\let\cleardoublepage\clearpage
+\input{preamble/notation.tex}
+% ************************ Informações da Tese e Meta data **********************
+% Não comente esse input, caso contrário a capa do trabalho não funciona direito
+%\let\cleardoublepage\clearpage
 
-% Configurations
-\input{Preamble/packages}
-
-% ************************ Thesis Information & Meta-data **********************
-% Thesis title and author information, refernce file for biblatex
 \input{thesis-info}
 
+% ***************************** Modo Capítulo ***********************************
+% O modo capítulo permite o escritor imprimir um capítulo particular com referências
+% Título, Conteúdo, e Frontmatter são desligados por padrão
+% Opção útil para revisar um único capítulo ou enviar ao orientador para correções
+% Para usar, basta passar a opção `chapter' para a classe do documento
+
+\ifdefineChapter
+ %\includeonly{Chapter3/chapter3} %escolha qual capítulo deve ser carregado
+\fi
+\usepackage{xpatch}
+\usepackage{blindtext}
+
+
+\makeatletter
+
+\xpatchcmd{\@makeschapterhead}{%
+  \Huge \bfseries  #1\par\nobreak%
+}{%
+  \Huge \bfseries\centering #1\par\nobreak%
+}{\typeout{Patched makeschapterhead}}{\typeout{patching of @makeschapterhead failed}}
+
+
+\xpatchcmd{\@makechapterhead}{%
+  \huge\bfseries \@chapapp\space \thechapter
+}{%
+  \huge\bfseries\centering \@chapapp\space \thechapter
+}{\typeout{Patched @makechapterhead}}{\typeout{Patching of @makechapterhead failed}}
+
+\makeatother
+
+\usepackage{titlesec}
+\titleformat{\chapter}[display]{\bfseries\centering}{\huge Capítulo \thechapter}{1em}{\Huge}
+
 % ******************************** Front Matter ********************************
+\iffalse
+\usepackage{eso-pic}
+\newcommand\BackgroundPic{%
+\put(0,0){%
+\parbox[b][\paperheight]{\paperwidth}{%
+\vfill
+\centering
+\includegraphics[width=\paperwidth,height=\paperheight,%
+keepaspectratio]{background.jpg}%
+\vfill
+}}}
+\fi
 \begin{document}
-
+%\AddToShipoutPicture*{\BackgroundPic}
 \frontmatter
-
+\pagestyle{empty}
 \maketitle
 
-\includepdf[pages={{}, 1, {}}]{Assets/second_front}
+%\let\cleardoublepage\clearpage
+\includepdf[pages=-, pagecommand={}]{creditos/creditos.pdf}
+\includepdf[pages=1, pagecommand={}]{assets/codigo_segunda_pagina/sec.pdf}
+\thispagestyle{plain}
+%\let\cleardoublepage\clearpage
+%\includepdf[pages=1, pagecommand={}]{Assets/lbc1}
+%\let\cleardoublepa'ge\clearpage
+\include{dedication/dedication}
+%\let\cleardoublepage\clearpage
+\include{acknowledgement/acknowledgement}
+%\let\cleardoublepage\clearpage
+\include{abstract/abstract}
 
-\includepdf[pages={1, {}}]{Assets/library_catalog}
 
-\include{Dedication/dedication}
-\include{Acknowledgement/acknowledgement}
-\include{Abstract/abstract}
 
+
+\pagestyle{MyFancy}
 % *********************** Adding TOC and List of Figures ***********************
 
 \tableofcontents
 
-\listoffigures
 
-\listoftables
+%\listoftables
 
 % \printnomenclature[space] space can be set as 2em between symbol and description
 %\printnomenclature[3em]
 
-\printnomenclature%
+%\printnomenclature
 
 % ******************************** Main Matter *********************************
-\mainmatter%
+\mainmatter
+%\include{pref/pref}
+\include{introduction/intro}
+\include{chapter_1/chapter_1}
+\include{chapter_2/chapter_2}
+%\include{Chapter4/chapter4}
+%\include{Chapter5/chapter5}
+%\include{Chapter6/chapter6}
+%\include{Chapter7/chapter7}
 
-\include{Chapter1/chapter1}
-\include{Chapter2/chapter2}
-\include{Chapter3/chapter3}
+
 
 % ********************************** Back Matter *******************************
 % Backmatter should be commented out, if you are using appendices after References
 %\backmatter
 
 % ********************************** Bibliography ******************************
+\fancypagestyle{plain}{%              
+\fancyhf{}
+%\renewcommand{\subsectionmark}[1]{%
+  %\markright{\MakeUppercase{\thesubsection\ \ \ \ #1 }}}
+  %\renewcommand{\chaptermark}[1]{\markboth{teste ##1}{}}
+  %\renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1}}
+  %\renewcommand{\headrulewidth}{0.7pt}
+    %\fancyhead[LO]{\bfseries  \nouppercase{CAPÍTULO \thechapter}  }
+      \renewcommand\footrule{%
+
+ \color{\corcaps}\noindent\makebox[\linewidth]{\rule{\paperwidth}{1pt}}
+}
+      \renewcommand\headrule{%
+
+ \color{\corcaps}\noindent\makebox[\linewidth]{\rule{\paperwidth}{1pt}}
+}
+        \fancyhead[LO]{\bfseries BIBLIOGRAFIA}
+        \fancyfoot[RO]{\bfseries Página \thepage \ de \pageref*{LastPage}}
+    %\fancyhead[RO]{\bfseries \nouppercase \leftmark}
+    }
+
+\pagestyle{plain}
+\fancypagestyle{plainbib}{%              
+\fancyhf{}
+%\renewcommand{\subsectionmark}[1]{%
+  %\markright{\MakeUppercase{\thesubsection\ \ \ \ #1 }}}
+  %\renewcommand{\chaptermark}[1]{\markboth{teste ##1}{}}
+  %\renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1}}
+  %\renewcommand{\headrulewidth}{0.7pt}
+    %\fancyhead[LO]{\bfseries  \nouppercase{CAPÍTULO \thechapter}  }
+      \renewcommand\footrule{%
+
+ \color{\corcaps}\noindent\makebox[\linewidth]{\rule{\paperwidth}{1pt}}
+}
+      \renewcommand\headrule{%
+
+ \color{\corcaps}\noindent\makebox[\linewidth]{\rule{\paperwidth}{1pt}}
+}
+        \fancyhead[LO]{\bfseries BIBLIOGRAFIA}
+        \fancyfoot[RO]{\bfseries Página \thepage \ de \pageref*{LastPage}}
+    %\fancyhead[RO]{\bfseries \nouppercase \leftmark}
+    }
+
+\pagestyle{plainbib}
+
 \begin{spacing}{0.9}
+\color{gal}
 
-% To use the conventional natbib style referencing
-% Bibliography style previews: http://nodonn.tipido.net/bibstyle.php
-% Reference styles: http://sites.stat.psu.edu/~surajit/present/bib.htm
+\begin{thebibliography}{99}
 
-\bibliographystyle{apalike}
+{\bfseries
+\color{teal}
+\bibitem{ernani}
+
+\bl{
+\textbf{Cao, Huai-Dong; Ribeiro, Ernani, Jr.; Zhou, Detang.} Four-dimensional complete gradient shrinking Ricci solitons. \emph{J. Reine Angew. Math.} 778 (2021), 127--144.
+}
+
+
+\PlaceText{69mm}{35mm}{ \color{gal}\noindent\makebox[\linewidth]{\rule{2\paperwidth}{1pt}}}
+
+\PlaceText{69mm}{57mm}{ \color{gal}\noindent\makebox[\linewidth]{\rule{2\paperwidth}{1pt}}}
+
+\PlaceText{15mm}{16mm}{ \color{white}\noindent\makebox[\linewidth]{\rule{2\paperwidth}{30pt}}}
+
+\vspace{-1.5cm}
+
+\bibitem{ivo}
+\bl{
+\textbf{Couto, I. T.} About curvature like tensors. Texto encontrado em página pessoal. Disponível em: \href{https://www.asc.ohio-state.edu/terekcouto.1/texts/curvaturelike.pdf}{\textbf{https://www.asc.ohio-state.edu/terekcouto.1/texts/curvaturelike.pdf}}. Acessado em 10 de fevereiro de 2023.
+}
+
+\bibitem{ivoIndex}
+\bl{
+\textbf{Couto, I. T.} Some index computations with curvature tensors. Texto encontrado em página pessoal. Disponível em: \href{https://www.asc.ohio-state.edu/terekcouto.1/texts/index_curvature.pdf}{\textbf{https://www.asc.ohio-state.edu/terekcouto.1/texts/index\_curvature.pdf}}. Acessado em 10 de fevereiro de 2023.
+}
+
+
+\bibitem{jeff}
+\bl{
+\textbf{Viaclovsky, J. A.} Math 865, Topics in Riemannian Geometry. Notas de aula. Disponível em: \href{https://www.math.uci.edu/~jviaclov/courses/865_Fall_2007.pdf}{\textbf{\url{https://www.math.uci.edu/~jviaclov/courses/865\_Fall\_2007.pdf}}}. Acessado em 10 de fevereiro de 2023. 
+}
+
+
+
+\bibitem{ivoten}
+\bl{
+\textbf{Couto, I. T.} A mini-course on tensors. Texto encontrado em página pessoal. Disponível em: \href{https://www.asc.ohio-state.edu/terekcouto.1/texts/tensors.pdf}{\textbf{https://www.asc.ohio-state.edu/terekcouto.1/texts/tensors.pdf}}. Acessado em 10 de fevereiro de 2023.
+}
+
+
+\bibitem{rodney}
+\bl{
+\textbf{Biezuner, R. J.} Notas de aula de geometria Riemanniana. Texto encontrado em página pessoal. Disponível em: \href{http://150.164.25.15/~rodney/notas_de_aula/geometria_riemanniana.pdf}{\textbf{\url{http://150.164.25.15/~rodney/notas_de_aula/geometria_riemanniana.pdf}}}. Acessado em 10 de fevereiro de 2023.
+}
+
+
+
+
+\bibitem{topping}
+\bl{
+\textbf{Topping, Peter.} Lectures on the Ricci flow. London Mathematical Society Lecture Note Series, 325. \emph{Cambridge University Press, Cambridge,} 2006. x+113 pp. ISBN: 978-0-521-68947-2; 0-521-68947-3.
+}
+
+\bibitem{eqpoint}
+\bl{
+\textbf{Emineti, Manolo; La Nave, Gabriele; Mantegazza, Carlo.} Ricci solitons: the equation point of view. \emph{Manuscrita Math.} \textbf{127} (2008), no. 3, 345--367.
+}
+
+
+
+\bibitem{petlivro}
+\bl{
+\textbf{Petersen, Peter.} Riemannian geometry. Second edition. Graduate Texts in Mathematics, 171. Springer, New York, 2006. xvi+401 pp. ISBN: 978-0387-29246-5; 0-387-29246-2.
+}
+
+
+
+\bibitem{pet1}
+\bl{
+\textbf{Petersen, Peter; Wylie, William.} On the classification of gradient Ricci solitons. Geom. Topol. \textbf{14} (2010), no. 4, 2277--2300.
+}
+
+
+
+\bibitem{pet2}
+\bl{
+\textbf{Petersen, Peter; Wylie, William.} Rigidity of gradient Ricci solitons. Pacific J. Math. \textbf{241} (2009), no. 2, 329--345.
+}
+
+
+
+\bibitem{chen}
+\bl{
+\textbf{Chen, Bing-Long.} Strong uniqueness of the Ricci flow. \emph{J. Differential Geom.} \textbf{82} (2009), no. 2, 363--382.
+}
+
+
+
+\bibitem{caodetang}
+\bl{\textbf{Cao, Huai-Dong; Zhou, Detang.} On complete gradient shrinking Ricci solitons. \emph{J. Differential Geom.} \textbf{85} (2010), no. 2, 175--185.
+}
+
+
+
+\bibitem{derd}
+\bl{\textbf{Derdziński, Andrzej.} Self-dual Kähler manifolds and Einstein manifolds of dimension four. \emph{Compositio Math.} \textbf{49} (1983), no. 3, 405--433.}
+
+
+
+\bibitem{caotran}
+\bl{\textbf{Cao, Xiaodong; Tran, Hung.} The Weyl tensor of gradient Ricci solitons. \textit{Geom. Topol.} \textbf{20} (2016), no. 1, 389--436.
+}
+
+
+
+\bibitem{peng}
+\bl{\textbf{Wu, Peng.} A Weitzenböck formula for canonical metrics on four-manifolds. \emph{Trans. Amer. Math. Soc.} \textbf{369} (2017), no. 2, 1079--1096.}
+
+
+
+
+\bibitem{cutoffartigo}
+\bl{
+\textbf{Azagra, D.; Ferrera, J.; López-Mesas, F.; Rangel, Y. } Smooth approximation of Lipschitz functions on Riemannian manifolds. \emph{J. Math. Anal. Appl.} \textbf{326} (2007), no. 2, 1370--1378.
+}
+
+
+ 
+\bibitem{peng33}
+\bl{
+\textbf{Wu, Jia-Yong; Wu, Peng; Wylie, William.} Gradient shrinking Ricci solitons of half harmonic Weyl curvature. \emph{Calc. Var. Partial Differential Equations} \textbf{57} (2018), no. 5, Paper No. 141, 15 pp.
+}
+
+
+
+
+\bibitem{munt}
+\bl{
+\textbf{Munteanu, Ovidiu; Sesum, Natasa.} On gradient Ricci solitons. \emph{J. Geom. Anal.} \textbf{23} (2013), no. 2, 539--561.
+}
+
+
+
+\bibitem{munt25}
+\bl{
+\textbf{Munteanu, Ovidiu; Wang, Jiaping.} Geometry of shrinking Ricci solitons. \emph{Compos. Math.} \textbf{151} (2015), no. 12, 2273--2300.
+}
+
+
+
+\bibitem{rteo1.2}
+\bl{\textbf{Chen, Xiuxiong; Wang, Yuanqi.} On four-dimensional anti-self-dual gradient Ricci solitons. \emph{J. Geom. Anal.} \textbf{25} (2015), no. 2, 1335--1343.}
+
+\bibitem{LeeTop}
+\bl{
+\textbf{Lee, John M.} Introduction to topological manifolds. Second edition. Graduate Texts in Mathematics, 202. Springer, New York, 2011. xviii+433 pp. ISBN: 978-1-4419-7939-1
+}
+
+\bibitem{leesmooth}
+\bl{
+\textbf{Lee, John M.} Introduction to smooth manifolds. Second edition. Graduate Texts in Mathematics, 218. Springer, New York, 2013. xvi+708 pp. ISBN: 978-1-4419-9981-8 
+}
+
+\bibitem{leeriem}
+\bl{
+\textbf{Lee, John M.} Introduction to Riemannian manifolds. Second edition of [MR1468735]. Graduate Texts in Mathematics, 176. Springer, Cham, 2018. xiii+437 pp. ISBN: 978-3-319-91754-2; 978-3-319-91755-9
+}
+
+\bibitem{foster}
+\bl{
+\textbf{Foster, James; Nightingale, J. David.} A short course in general relativity. Third edition. Springer, New York, 2006. x+292 pp. ISBN: 978-0387-26078-5; 0-387-26078-1.
+}
+
+\bibitem{TuRiem}
+\bl{
+\textbf{Tu, Loring W.} Differential geometry. Connections, curvature, and characteristic classes. Graduate Texts in Mathematics, 275. \emph{Springer, Cham,} 2017. xvi+346 pp. ISBN: 978-3-319-55082-4; 978-3-319-55084-8.
+}
+
+
+
+
+\bibitem{kirby}
+\bl{\textbf{Kirby, Robion C.} The topology of $4$-manifolds. Lecture Notes in Mathematics, 1374. \emph{Springer-Verlag, Berlin,} 1989. {\rm vi}+108 pp. ISBN: 3-540-51148-2. \iffalse \href{https://mathscinet.ams.org/mathscinet-getitem?mr=1001966}{\textbf{MR1001966}} \fi
+}
+
+\bibitem{2ham}
+\bl{\textbf{Hamilton, Richard S.} The Ricci flow on surfaces. \emph{Mathematics and general relativity (Santa Cruz, CA, 1986)}, 237--262, Contemp. Math., 71, \emph{Amer. Math. Soc., Providence, RI, } 1988. \iffalse \href{https://mathscinet.ams.org/mathscinet-getitem?mr=954419}{\textbf{MR0954419}} \fi}
+
+\bibitem{3ham}
+\bl{
+\textbf{Hamilton, Richard S.} Three-manifolds with positive Ricci curvature. \emph{J. Differential Geometry} \textbf{17} (1982), no. 2, 255--306.
+}
+
+
+
+\bibitem{4ham}
+\bl{
+\textbf{Hamilton, Richard S.} Four-manifolds with positive curvature operator. \emph{J. Differential Geom.} \textbf{24} (1986), no. 2, 153--179.
+}
+
+\bibitem{PerelmanGradiente}
+\bl{
+\textbf{Perelman, G. Y.} The entropy formula for the Ricci flow and its geometric applications. Preprint, arXiv math/0211159, 2002.
+}
+
+\bibitem{HamRicciFlow}
+\bl{
+\textbf{Chow, Bennett; Lu, Peng; Ni, Lei.} Hamilton's Ricci flow. Graduate Studies in Mathematics, 77. \emph{American Mathematical Society, Providence, RI; Science Press Beijing, New York}, 2006. xxxvi+608 pp. ISBN: 978-0-8218-4231-7; 0-8218-4231-5.
+}
+
+\bibitem{MeuWarped}
+\bl{
+\textbf{Horácio, M.A.R.M.} Produtos warped. Texto encontrado em página pessoal. Disponível em \href{https://github.com/SaganGromov/ProdutosWarped/blob/main/ProdutosWarped.pdf}{\textbf{https://github.com/SaganGromov/ProdutosWarped/blob/main/ProdutosWarped.pdf}}. Acessado em 13 de fevereiro de 2023.
+}
+
+
+
+\bibitem{McMillan}
+\bl{\textbf{McMillan, D. R., Jr.} Some contractible open $3$-manifolds. \emph{Trans. Amer. Math. Soc.} 102 (1962), 373--382. \iffalse \href{https://mathscinet.ams.org/mathscinet-getitem?mr=137105}{\textbf{MR0137105}} \fi}
+
+\iffalse
+\bibitem{dodecaedro}
+\bl{C.Weber e H.Seifert, \quotes{Die beiden Dodekaedraume,} \emph{Mathematische Zeitschrift} 37, no. 2 (1933)}
+\fi
+
+\bibitem{dodecaedro}
+\bl{
+\textbf{Seifert H., Weber C. } Die beiden Dodekaedraüme, Mathematische Zeitschrift 1933. V. 37. P. 237–253.
+}
+
+\bibitem{ArtDodecaedro}
+\bl{\textbf{Luminet, J.P., J.R. Weeks, A. Riazuelo, R. Lehoucq, R., and J.P. Uzan.} Dodecahedral space topology as an explanation for weak wide-angle temperaure correlations in the cosmic microwave background. \emph{Nature}, (2003), \textbf{425}, 593-95.}
+
+\bibitem{JohnMorgan}
+\bl{
+\textbf{Morgan, John W.} Recent progress on the Poincaré conjecture and the classification of 3-manifolds. \emph{Bull. Amer. Math. Soc. (N.S.)} \textbf{42} (2005), no. 1, 57--78.
+}
+
+
+\bibitem{overflow}
+\bl{
+\textbf{MathOverflow}. Classification of surfaces and the TOP, DIFF and PL categories for manifolds. Disponível em: \href{https://mathoverflow.net/questions/96670/classification-of-surfaces-and-the-top-diff-and-pl-categories-for-manifolds}{\textbf{https://mathoverflow.net/questions/96670/classification-of-surfaces-and-the-top-diff-and-pl-categories-for-manifolds}}. Acessado em 10 de fevereiro de 2023.
+}
+\iffalse
+\bibitem{overflow}
+\bl{MathOverflow;} \href{https://mathoverflow.net/questions/96670/classification-of-surfaces-and-the-top-diff-and-pl-categories-for-manifolds}{\textbf{Classification of surfaces and the TOP, DIFF and PL categories for manifolds}}
+\fi
+
+\bibitem{NaoCompacto}
+\bl{
+\textbf{Richards, Ian.} On the classifcation of noncompact surfaces. \emph{Trans. Amer. Math. Soc.} 106 (1963), 259--269.
+}
+
+\bibitem{Adam}
+\bl{\textbf{Rudnik, Adam Petzet.} \emph{Analysis of the Ricci Flow on Compact Manifolds.} Dissertação de mestrado, Universidade de São Paulo, 2019.}
+
+\bibitem{ChowKnopf}
+\bl{\textbf{Chow, Bennett; Knopf, Dan.} The Ricci flow: an introduction. Mathematical Surveys and Monographs, 110. \emph{American Mathematical Society, Providence, RI}, 2004. xii+325 pp. ISBN: 0-8218-3515-7.
+}
+
+\iffalse
+\bibitem{Lavoyer}
+\bl{Lucas Lavoyer, Dissertação de Mestrado} \href{https://mat.unb.br/upload/repositorio/2020_06_24/Dissertacao_Lucas.pdf}{\textbf{On the Maximum Principle and the Ricci flow}}
+\fi
+
+
+\bibitem{DifConf1}
+\bl{\textbf{Gomes, J.N.} \emph{Rigidez de superfícies de contato e caracterização de variedades Riemannianas munidas de um campo conforme ou de alguma métrica especial.} Tese de doutorado, Universidade Federal do Ceará, (2012).}
+
+\bibitem{DifConf2}
+\bl{\textbf{Sharma, Ramesh.} Almost Ricci solitons and $K$-contact geometry. Monatsh. Math. \textbf{175} (2014), no. 4, 621--628.
+}
+
+
+
+\bibitem{shin}
+\bl{
+\textbf{Shin, Jinwoo.} On the classification of 4-dimensional $(m,\rho)$-quasi-Einstein manifolds with harmonic Weyl curvature. \emph{Ann. Global Anal. Geom.} \textbf{51} (2017), no. 4, 379--399.
+}
+
+\iffalse
+\bibitem{pigola} \bl{Pigola, S.; Rigoli, M.; Rimoldi, M.; Setti, A. G. \textit{Ricci almost solitons}. Ann. Sc. Norm. Super. Pisa Cl. Sci. v. 10 n. 4, 757-799, 2011.}
+
+
+\bibitem{Ryan} \bl{Ryan, P. J.: Homogeneity and some curvature conditions for hypersurfaces. {\textit {Tohoku Mathematical Journal.}} {\textbf{ 21(3)}}. 363-388, 1969.}
+
+\fi
+
+
+
+\bibitem{Revista}
+\bl{
+\textbf{Mackenzie, Dana.} The Poincaré Conjecture--Proved. \emph{Science, } 314(5807):1848-1849, 2006. Disponível em: \href{https://doi.org/10.1126/science.314.5807.1848}{\bf{DOI: 10.1126/science.314.5807.1848}}.
+Acessado em 10 de fevereiro de 2023.}
+
+\bibitem{Permissao}
+\bl{
+\textbf{Reprints and Permissions, Science, AAAS.} Disponível em: \href{https://www.science.org/content/page/reprints-and-permissions}{\textbf{\url{https://www.science.org/content/page/reprints-and-permissions}}}. Acessado em 10 de fevereiro de 2023. 
+}
+
+
+\bibitem{Ivey}
+\bl{
+\textbf{Ivey, Thomas.} New examples of complete Ricci solitons. \emph{Proc. Amer. Math. Soc.} \textbf{122} (1994), no. 1, 241--245.
+}
+
+\bibitem{PerelmanS}
+\bl{
+\textbf{Perelman, G. Y.} Ricci flow with surgery on three manifolds. Preprint, ArXiv:math.DG/0303109, 2003.
+}
+
+\iffalse
+\bibitem{PerelmanS}
+\bl{
+Grisha Perelman, \emph{Ricci flow with surgery on three manifolds,} ArXiv:math.DG/0303109 (2003).
+}
+\fi
+
+\bibitem{Naber}
+\bl{
+\textbf{Naber, Aaron.} Noncompact shrinking four solitons with nonnegative curvature. \emph{J. Reine Angew. Math.} 645 (2010), 125--153.
+}
+
+\bibitem{NiWallach}
+\bl{
+\textbf{Ni, Lei; Wallach, Nolan.} On a classification of gradient shrinking solitons. \emph{Math. Res. Lett.} \textbf{15} (2008), no. 5, 941--955.
+}
+
+
+\bibitem{CaoChenZhu}
+\bl{
+\textbf{Cao, Huai-Dong; Chen, Bing-Long; Zhu, Xi-Ping.} Recent developments on Hamilton's Ricci flow. \emph{Surveys in differential geometry. Vol. XII. Geometric flows,} 47--112, Surv. Differ. Geom., 12, \emph{Int. Press, Somerville, MA,} 2008.
+}
+
+\bibitem{Arnold}
+\bl{\textbf{Arnold, Vladimir I.} On Teaching Mathematics. (Polonês) Traduzido do russo por Danuta Śledziewska-Blocka. \emph{Wiadom. Mat.} 37 (2001), 17--26.}
+
+
+\bibitem{PEN1}
+\bl{
+\textbf{Penrose, Roger.} The emperor's new mind. Concerning computers, minds, and the laws of physics. Com um prefácio por Martin Gardner. \emph{The Clarendon Press, Oxford University Press, New York,} 1989. {\rm xiv}+466 pp. ISBN: 0-19-851973-7.
+}
+
+\bibitem{PEN2}
+\bl{
+\textbf{Penrose, Roger.} The road to reality. A complete guide to the laws of the universe. \emph{Alfred A. Knopf, Inc., New York,} 2005. xxviii+1099 pp. ISBN: 0-679-45443-8.
+}
+
+\bibitem{RIEMANN}
+\bl{\textbf{Riemann, Bernhard.} On the Hypothesis Which Lie At the Bases of Geometry. \emph{Nature}. \textbf{8,} 36-37 (1873). \iffalse \href{https://doi.org/10.1038/008036a0}{https://doi.org/10.1038/008036a0} \fi
+}
+
+\bibitem{POINCHYP}
+\bl{\textbf{Poincaré, Henry.} \quotes{Science and Hypothesis}, \emph{The Value of Science: Essential Writings of Henri Poincaré, } ed. Stephen Jay Gould (New York: The Modern Library 2001), p.56.}
+
+\bibitem{Lob}
+\bl{
+\textbf{Lobachevsky, Nikolai I.} \emph{The Foundations of Geometry: Works on Non-Euclidean Geometry.} Traduzido do russo por Svetla Petkova. Editado (com uma Introdução) por V. Petkov. Minkowski Institute Press, Montreal.
+}
+
+\bibitem{LobD}
+\bl{
+\textbf{Kragh, Helge.} Geometry and Astronomy: Pre-Einstein Speculations of Non-Euclidean Space. Preprint, ArXiv:physics/12054909, 2012.
+}
+
+\bibitem{Kuhnel}
+\bl{
+\textbf{Kühnel, Wolfgang.} Conformal transformations between Einstein spaces. \emph{Conformal geometry (Bonn, 1985/1986),} 105--146, Aspects Math., E12, \emph{Friedr. Vieweg, Braunschweig,} 1988.
+}
+
+\bibitem{Flanders}
+\bl{
+\textbf{Flanders, Harley.} Differential forms with applications to the physical sciences. Second edition. Dover Books on Advanced Mathematics. \emph{Dover Publications, Inc., New York,} 1989. {\rm xvi}+205 pp. ISBN: 0-486-66169-5.
+}
+
+
+
+}
+
+
+
+
+\end{thebibliography}
+
+%\bibliographystyle{apalike}
 %\bibliographystyle{unsrt} % Use for unsorted references
-%\bibliographystyle{plainnat} % use this to have URLs listed in References
-\cleardoublepage%
-\bibliography{References/references} % Path to your References.bib file
-%\printbibliography[heading=bibintoc, title={References}]
+%\bibliography{References/citacoes}
+
 \end{spacing}
 
-% ********************************** Appendices ********************************
+% ********************************** Apêndices ********************************
 
-\begin{appendices} % Using appendices environment for more functunality
-
-\include{Appendix1/appendix1}
-\include{Appendix2/appendix2}
-
-\end{appendices}
 
 % *************************************** Index ********************************
-\printthesisindex% % If index is present
+\printthesisindex % If index is present
 
 \end{document}

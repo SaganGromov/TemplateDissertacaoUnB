@@ -35,7 +35,7 @@
 \newif\ifsetFont\setFontfalse                 % Font is not set
 
 \newif\ifPHD@times\PHD@timesfalse             % Times with Math Support
-\DeclareOption{times}{
+\DeclareOption{lmodern}{
   \ifsetFont
     \ClassWarning{PhDThesisPSnPDF}{Font selection conflict: A font package was
       already specified. Please check the document class options in case you
@@ -265,7 +265,7 @@ supported!}
 % Hides Contents appearing from TOC, but adds it to bookmarks
 \let\temptableofcontents\tableofcontents
 \renewcommand{\tableofcontents}{
-  \cleardoublepage
+  %\cleardoublepage
   \pdfbookmark[0]{\contentsname}{Contents}
   \temptableofcontents
 }
@@ -278,11 +278,11 @@ supported!}
   \RequirePackage[pdftex]{graphicx}
   \DeclareGraphicsExtensions{.png, .jpg, .pdf}
   \pdfcompresslevel=9
-  \graphicspath{{Figs/Raster/}{Figs/}}
+  \graphicspath{{figs/Raster/}{figs/}}
 \else
   \RequirePackage{graphicx}
   \DeclareGraphicsExtensions{.eps, .ps}
-  \graphicspath{{Figs/Vector/}{Figs/}}
+  \graphicspath{{figs/Vector/}{figs/}}
 \fi
 
 
@@ -331,22 +331,22 @@ supported!}
 \ifPHD@lineno
 \RequirePackage[switch,pagewise,mathlines]{lineno}
 \renewcommand{\frontmatter}{%
-  \cleardoublepage
+  %\cleardoublepage
   \@mainmatterfalse
   \pagenumbering{roman}
   \nolinenumbers
 }
 \renewcommand{\mainmatter}{%
-  \cleardoublepage
+  %\cleardoublepage
   \@mainmattertrue
   \pagenumbering{arabic}
   \linenumbers
 }
 \renewcommand{\backmatter}{%
   \if@openright
-    \cleardoublepage
+    %\cleardoublepage
   \else
-    \clearpage
+    %\clearpage
   \fi
   \@mainmatterfalse
   \linenumbers
@@ -557,16 +557,16 @@ supported!}
   \usepackage[]{unicode-math}
   \setmainfont[
     Extension = .otf,
-    UprightFont = *-Regular,
-    BoldFont = *-Bold,
-    ItalicFont = *-Italic,
-    BoldItalicFont = *-BoldItalic,
-  ]{XITS}
+    UprightFont = *-regular,
+    BoldFont = *-bold,
+    ItalicFont = *-italic,
+    BoldItalicFont = *-bolditalic,
+  ]{xits}
 
   \setmathfont[
     Extension = .otf,
-    BoldFont = XITSMath-Bold,
-  ]{XITSMath-Regular}
+    BoldFont = *bold,
+  ]{xits-math}
 
 \else
   % default: pdfLaTeX
@@ -620,10 +620,11 @@ supported!}
     anchorcolor=black
   }
   \ifsetCustomMargin
+  	%\usepackage[bottom=0.5in,top=0.5in,left=0.3in,right=0.3in]{geometry}		
   % Margin to be define in preamble using geometry package
   \else
-    \RequirePackage[paper=\PHD@papersize,hmarginratio=1:1,
-      vmarginratio=1:1,scale=0.75,bindingoffset=5mm]{geometry}
+    %\RequirePackage[paper=\PHD@papersize,hmarginratio=1:1,
+      %vmarginratio=1:1,scale=0.75,bindingoffset=5mm]{geometry}
   \fi
 
   \if@twoside
@@ -633,39 +634,29 @@ supported!}
   \fi
 
 \else
-  % <deivid>
-%********************************************************************
-% Colors
-% ********************************************************************
-\PassOptionsToPackage{dvipsnames}{xcolor}
-\RequirePackage{xcolor} % [dvipsnames]
-\definecolor{CTsemi}{gray}{0.55} % chapter numbers will be semi transparent .5 .55 .6 .0
-\definecolor{CTcitation}{rgb}{0,0.5,0} % WebGreen
-\definecolor{CTurl}{named}{Maroon} % Maroon
-\definecolor{CTtitle}{named}{Maroon} % Maroon {cmyk}{0, 0.87, 0.68, 0.32}
-\definecolor{CTlink}{named}{RoyalBlue} % RoyalBlue {cmyk}{1, 0.50, 0, 0}
-\definecolor{halfgray}{gray}{0.55} % chapter numbers will be semi transparent .5 .55 .6 .0
-\definecolor{webgreen}{rgb}{0,0.5,0}
-\definecolor{webbrown}{rgb}{0.6,0,0}
-
-\hypersetup{
-  final=true,
-  plainpages=false,
-  pdfstartview=FitV,
-  pdftoolbar=true,
-  pdfmenubar=true,
-  bookmarksopen=true,
-  bookmarksnumbered=true,
-  breaklinks=true,
-  linktocpage,
-  colorlinks=true,
-  linkcolor=CTlink,
-  urlcolor=CTurl,
-  citecolor=CTcitation,
-  anchorcolor=green
-}
+  % For PDF Online version
+  \hypersetup{
+    final=true,
+    plainpages=false,
+    pdfstartview=FitV,
+    pdftoolbar=true,
+    pdfmenubar=true,
+    bookmarksopen=true,
+    bookmarksnumbered=true,
+    breaklinks=true,
+    linktocpage,
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue,
+    anchorcolor=green
+  }
 
   \ifsetCustomMargin
+  %\geometry{lmargin=2.5cm,rmargin=2.5cm,tmargin=2.0cm,bmargin=2.0cm}
+  \usepackage[bottom=0.8in,top=0.7in,left=0.5in,right=0.5in]{geometry}
+  %\usepackage[bottom=2cm,top=2cm,left=1in,right=1in]{geometry}
+  %\usepackage[lmargin=2.5cm,rmargin=2.5cm,tmargin=2.0cm,bmargin=2.0cm]{geometry}
     % Margin to be define in preamble using geometry package
     \else
       % No Margin staggering on Odd and Even side
@@ -702,7 +693,7 @@ supported!}
 \ifpdf
 \AtBeginDocument{
   \hypersetup{
-    pdftitle = {\@title},
+    pdftitle = {\TITULOfinal},
     pdfauthor = {\@author},
     pdfsubject={\@subject},
     pdfkeywords={\@keywords}
@@ -746,63 +737,23 @@ wish to left align your text}
 
 \RequirePackage{fancyhdr} % Define custom header
 
-% Style 1: Sets Page Number at the Top and Chapter/Section Name on LE/RO
-\fancypagestyle{PageStyleI}{
-  \renewcommand{\chaptermark}[1]{\markboth{##1}{}}
-  \renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1\ }}
-  \fancyhf{}
-  \fancyhead[RO]{\nouppercase \rightmark\hspace{0.25em} |
-    \hspace{0.25em} \bfseries{\thepage}}
-  \fancyhead[LE]{ {\bfseries\thepage} \hspace{0.25em} |
-    \hspace{0.25em} \nouppercase \leftmark}
-}
 
-% Style 2: Sets Page Number at the Bottom with Chapter/Section Name on LO/RE
-\fancypagestyle{PageStyleII}{
-  \renewcommand{\chaptermark}[1]{\markboth{##1}{}}
-  \renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1}}
-  \fancyhf{}
-  \fancyhead[RO]{\bfseries\nouppercase \rightmark}
-  \fancyhead[LE]{\bfseries \nouppercase \leftmark}
-  \fancyfoot[C]{\thepage}
-}
 
 
 % Set Fancy Header Command is defined to Load FancyHdr after Geometry is defined
-\newcommand{\setFancyHdr}{
 
-\pagestyle{fancy}
 
-\ifPHD@pageStyleI
-  % Style 1: Sets Page Number at the Top and Chapter/Section Name on LE/RO
-  \pagestyle{PageStyleI}
 
-\else
-  \ifPHD@pageStyleII
-
-  % Style 2: Sets Page Number at the Bottom with Chapter/Section Name on LO/RE
-  \pagestyle{PageStyleII}
-
-  \else
-  % Default Style: Sets Page Number at the Top (LE/RO) with Chapter/Section Name
-  % on LO/RE and an empty footer
-    \renewcommand{\chaptermark}[1]{\markboth {##1}{}}
-    \renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1}}
-    \fancyhf{}
-    \fancyhead[LO]{\nouppercase \rightmark}
-    \fancyhead[LE,RO]{\bfseries\thepage}
-    \fancyhead[RE]{\nouppercase \leftmark}
-  \fi
-\fi
-}
-
+    
 \setlength{\headheight}{14.5pt}
 %\renewcommand{\headrulewidth}{0.5pt}
 %\renewcommand{\footrulewidth}{0pt}
-\fancypagestyle{plain}{
+\fancypagestyle{MyFancy}{
   \fancyhead{}
   \renewcommand{\headrulewidth}{0pt}
 }
+
+
 
 % If Margin has been set (default margin print/online version)
 \ifsetCustomMargin
@@ -843,6 +794,10 @@ wish to left align your text}
 % The name of your department(eg. Engineering, Maths, Physics)
 \newcommand{\@dept}{}
 \newcommand{\dept}[1]{\renewcommand{\@dept}{#1}}
+
+\newcommand{\@matheuslines}{}
+\newcommand{\matheuslines}[1]{\renewcommand{\@matheuslines}{#1}}
+
 
 % The name of your college (eg. King's)
 \newcommand{\@college}{}
@@ -888,7 +843,7 @@ wish to left align your text}
 \newcommand{\advisorlinewidth}[1]{\renewcommand{\@advisorlinewidth}{#1}}
 
 % Submission Text
-\newcommand{\submissiontext}{This dissertation is submitted for the degree of }
+\newcommand{\submissiontext}{}
 
 % keywords (These keywords will appear in the PDF meta-information
 % called `pdfkeywords`.)
@@ -906,14 +861,14 @@ wish to left align your text}
 % Acknowledgment title text
 \newcommand{\@acknowledgementstitle}{Acknowledgements}
 
+% Acknowledgment title text
 \newcommand{\@agradecimentostitulo}{Agradecimentos}
 
 % Abstract title text
 \newcommand{\@abstracttitle}{Abstract}
 
-% <deivid>
-% Texto título resumo
-\newcommand{\@resumotitle}{Resumo}
+% Abstract title text
+\newcommand{\@resumotitulo}{Resumo}
 
 % Names for the nomenclature groups
 \newcommand{\@nomenclatureromans}{Roman Symbols}
@@ -945,8 +900,16 @@ wish to left align your text}
 % ******************************************************************************
 
 % ******************************** Title Page **********************************
-\renewcommand{\maketitle}{
 
+\newcommand\PlaceText[3]{%
+\begin{tikzpicture}[remember picture,overlay]
+\node[outer sep=0pt,inner sep=0pt,anchor=south west] 
+  at ([xshift=#1,yshift=-#2]current page.north west) {#3};
+\end{tikzpicture}%
+}
+\definecolor{gall}{RGB}{0, 7, 111}
+
+\renewcommand{\maketitle}{
 % To compute the free vertical space in Title page
 \computeTitlePageSpacing
 
@@ -954,6 +917,26 @@ wish to left align your text}
 
 \begin{singlespace}
 \begin{center}
+\PlaceText{15mm}{91mm}{ \color{black}\noindent\makebox[\linewidth]{\rule{2\paperwidth}{1pt}}}
+% de cima é a que vem a seguir
+\PlaceText{15mm}{53mm}{ \color{black}\noindent\makebox[\linewidth]{\rule{2\paperwidth}{1pt}}}
+\iffalse
+%barra de baixo primeiro
+\PlaceText{15mm}{50mm}{\color{\COR}\noindent\makebox[\linewidth]{\rule{2\paperwidth}{1pt}}}
+\PlaceText{15mm}{25mm}{ \color{\COR}\noindent\makebox[\linewidth]{\rule{2\paperwidth}{1pt}}}
+\PlaceText{5mm}{65mm}{\textcolor{\COR}{\textbf{\large Autor: Matheus Andrade Ribeiro de Moura Horácio}}}
+\PlaceText{5mm}{75mm}{\textcolor{\COR}{\large \textbf{Orientador: João Paulo dos Santos}}}
+
+\PlaceText{5mm}{95mm}{\textcolor{\COR}{\large \textbf{Departamento de Matemática,}}}
+\PlaceText{5mm}{101mm}{\textcolor{\COR}{\large \textbf{Universidade de Brasília}}}
+
+
+\PlaceText{23mm}{254mm}{\textcolor{\COR}{\large \textbf{Dissertação apresentada como requisito parcial para obtenção do grau de}}}
+\PlaceText{81mm}{260mm}{\textcolor{\COR}{\large \textbf{\textit{Mestre em Matemática}}}}
+
+\PlaceText{20mm}{294mm}{\textcolor{\COR}{\small \textbf{$^\star\text{Figura da capa por Cameron Slayden, aparição original em \mycitep{Revista}. Uso autorizado, conforme \mycitep{Permissao}.}$}}}
+
+\fi
 
 % University Crest Long if college crest is defined
 \ifPHD@collegeshield%
@@ -995,6 +978,12 @@ wish to left align your text}
 \vspace*{0.5em}
 \fi
 
+%matheuslines
+%{\usebox{\PHD@matheuslines}
+
+%{\usebox{\put(0,0){teste}}}
+
+
 % Department and University
 {\usebox{\PHD@dept}}
 \vspace{.2\PHD@titlepagespacing}
@@ -1017,7 +1006,7 @@ wish to left align your text}
 
 \newenvironment{dedication}
 {
-\cleardoublepage
+%\cleardoublepage
 \setsinglecolumn
 \vspace*{0.2\textheight}
 \thispagestyle{empty}
@@ -1031,7 +1020,7 @@ wish to left align your text}
 % "Declaration" label at the top of the page.
 
 \newenvironment{declaration}{
-\cleardoublepage
+%\cleardoublepage
 \setsinglecolumn
 \chapter*{\centering \Large \@declarationtitle}
 \thispagestyle{empty}
@@ -1049,16 +1038,16 @@ wish to left align your text}
 % "Acknowledgements" label at the top of the page.
 
 \newenvironment{acknowledgements}{
-\cleardoublepage
+%\cleardoublepage
 \setsinglecolumn
 \chapter*{\centering \Large \@acknowledgementstitle}
 \thispagestyle{empty}
 }
 
 \newenvironment{agradecimentos}{
-\cleardoublepage
+%\cleardoublepage
 \setsinglecolumn
-\chapter*{\centering \Large \@agradecimentostitulo}
+\chapter*{\centering \huge \@agradecimentostitulo}
 \thispagestyle{empty}
 }
 
@@ -1099,7 +1088,7 @@ wish to left align your text}
     \RequirePackage{makeidx}
     \makeindex
     \newcommand{\printthesisindex}{
-        \cleardoublepage
+        %\cleardoublepage
         \phantomsection
         \printindex}
 \else
@@ -1157,7 +1146,7 @@ wish to left align your text}
   \end{center}
 \else
 % Normal abstract in the thesis
-  \cleardoublepage
+  %\cleardoublepage
   \setsinglecolumn
   \chapter*{\centering \Large \@abstracttitle}
   \thispagestyle{empty}
@@ -1175,9 +1164,9 @@ wish to left align your text}
   \end{center}
 \else
 % Normal abstract in the thesis
-  \cleardoublepage
+  %\cleardoublepage
   \setsinglecolumn
-  \chapter*{\centering \Large \@resumotitle}
+  \chapter*{\centering \Large \@resumotitulo}
   \thispagestyle{empty}
 \fi
 }

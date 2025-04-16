@@ -1,0 +1,118 @@
+%!TEX root = ../thesis.tex
+%*******************************************************************************
+%*********************************** First Chapter *****************************
+%*******************************************************************************
+%\addtocounter{page}{7}
+\fancypagestyle{plain}{%              '
+\fancyhf{}
+%\renewcommand{\subsectionmark}[1]{%
+  %\markright{\MakeUppercase{\thesubsection\ \ \ \ #1 }}}
+
+\fancypagestyle{MyFancy}{%              
+\fancyhf{}
+%\renewcommand{\subsectionmark}[1]{%
+  %\markright{\MakeUppercase{\thesubsection\ \ \ \ #1 }}}
+ \color{\corcaps}\noindent\makebox[\linewidth]{\rule{\paperwidth}{1pt}}
+}
+  \renewcommand\footrule{%
+ \color{\corcaps}\noindent\makebox[\linewidth]{\rule{\paperwidth}{1pt}}
+}
+    %\fancyhead[RO]{\bfseries \rightmark}
+    }
+\pagestyle{MyFancy}
+\color{gal}
+\chapter{Preliminary Concepts and Notations}
+\markboth{Preliminaries}{Concepts}  
+\label{cap:preliminares}
+
+
+
+\ifpdf
+    \graphicspath{{Chapter1/figs/Raster/}{Chapter1/figs/PDF/}{Chapter1/figs/}}
+\else
+    \graphicspath{{Chapter1/figs/Vector/}{Chapter1/figs/}}
+\fi
+%********************************** %First Section  **************************************
+
+\PlaceText{69mm}{39mm}{ \color{gal}\noindent\makebox[\linewidth]{\rule{2\paperwidth}{1pt}}}
+
+\PlaceText{69mm}{79mm}{ \color{gal}\noindent\makebox[\linewidth]{\rule{2\paperwidth}{1pt}}}
+
+\color{black}
+The purpose of this chapter is to establish the foundational concepts, notations, and conventions that will be used throughout this work. While we aim to make the exposition as self-contained as possible, some familiarity with basic concepts in Riemannian geometry and differentiable manifolds is assumed. Below, we provide a brief overview of the key ideas.
+
+\section{Riemannian Manifolds}
+\PlaceText{15mm}{13mm}{ \color{white}\noindent\makebox[\linewidth]{\rule{2\paperwidth}{10pt}}}
+\vspace{-1.5cm}
+\begin{oobs}
+This section introduces the basic definitions and properties of Riemannian manifolds, including the notions of metric tensors, tangent spaces, and smooth maps. We also discuss the importance of coordinate charts and local frames in understanding the geometry of manifolds.
+\end{oobs}
+
+\begin{oobs}
+We adopt standard notations for Riemannian geometry. For instance, the metric tensor is denoted by \( g \), and the Levi-Civita connection is denoted by \( \nabla \). The curvature tensor, Ricci tensor, and scalar curvature are also introduced with their respective notations.
+\end{oobs}
+
+\begin{deff}
+A Riemannian manifold is a differentiable manifold \( \mathcal{M} \) equipped with a smooth, positive-definite metric tensor \( g \). This metric allows us to define notions of angles, lengths, and volumes on \( \mathcal{M} \).
+\end{deff}
+
+\begin{teorema}[Fundamental Theorem of Riemannian Geometry]
+On a Riemannian manifold \( (\mathcal{M}, g) \), there exists a unique torsion-free connection \( \nabla \) that is compatible with the metric \( g \). This connection is called the Levi-Civita connection.
+\end{teorema}
+
+\begin{demm}
+The proof involves verifying the existence and uniqueness of the Levi-Civita connection using the Koszul formula.
+\end{demm}
+
+\section{Tensors}
+\vspace{-0.7cm}
+This section provides an overview of tensor algebra and calculus, focusing on the types of tensors commonly encountered in Riemannian geometry. Topics include tensor products, contractions, and the metric-induced isomorphisms between tensors of different types.
+
+\begin{deff}
+A tensor of type \( (r, s) \) on a vector space \( V \) is a multilinear map \( T: V^* \times \cdots \times V^* \times V \times \cdots \times V \to \mathbb{R} \), where \( V^* \) is the dual space of \( V \).
+\end{deff}
+
+\begin{oobs}
+Tensors can be represented in a chosen basis, and their components transform according to specific rules under a change of basis. This property makes tensors coordinate-independent objects.
+\end{oobs}
+
+\begin{proposicao}
+The space of tensors of type \( (r, s) \) on a vector space \( V \) is a finite-dimensional vector space. Its dimension depends on the dimension of \( V \) and the values of \( r \) and \( s \).
+\end{proposicao}
+
+\section{Differential Forms}
+Differential forms are a special class of tensors that are completely antisymmetric. They play a central role in integration on manifolds and in the formulation of Stokes' theorem.
+
+\begin{deff}
+A differential form of degree \( k \) on a manifold \( \mathcal{M} \) is a completely antisymmetric tensor field of type \( (0, k) \).
+\end{deff}
+
+\begin{namedthm}{Theorem}[Stokes' Theorem]
+Let \( \mathcal{M} \) be an oriented manifold with boundary \( \partial \mathcal{M} \), and let \( \omega \) be a compactly supported \( (n-1) \)-form on \( \mathcal{M} \). Then,
+\[
+\int_{\mathcal{M}} d\omega = \int_{\partial \mathcal{M}} \omega.
+\]
+\end{namedthm}
+
+\section{Additional Topics}
+This section briefly introduces advanced topics such as the Hodge star operator, Laplacians, and Bochner's formula, which are essential tools in modern Riemannian geometry.
+
+\begin{deff}
+The Hodge star operator \( \star \) maps \( k \)-forms to \( (n-k) \)-forms on an \( n \)-dimensional Riemannian manifold. It is defined such that
+\[
+\alpha \wedge \star \beta = g(\alpha, \beta) \, \mathrm{vol},
+\]
+where \( \mathrm{vol} \) is the volume form.
+\end{deff}
+
+\begin{teorema}[Bochner's Formula]
+On a Riemannian manifold, the Laplacian of a function \( f \) satisfies
+\[
+\Delta f = \text{div}(\nabla f),
+\]
+where \( \Delta \) is the Laplace-Beltrami operator.
+\end{teorema}
+
+\begin{demm}
+The proof involves expressing the Laplacian in local coordinates and using the properties of the Levi-Civita connection.
+\end{demm}

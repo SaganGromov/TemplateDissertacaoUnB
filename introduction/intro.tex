@@ -1,0 +1,90 @@
+%!TEX root = ../thesis.tex
+%*******************************************************************************
+%*********************************** First Chapter *****************************
+%*******************************************************************************
+\fancypagestyle{plain}{%              
+\fancyhf{}
+%\renewcommand{\subsectionmark}[1]{%
+  %\markright{\MakeUppercase{\thesubsection\ \ \ \ #1 }}}
+  %\renewcommand{\chaptermark}[1]{\markboth{teste ##1}{}}
+  %\renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1}}
+
+  %\renewcommand{\headrulewidth}{0.7pt}
+    %\fancyhead[LO]{\bfseries  \nouppercase{CAPÍTULO \thechapter}  }
+      \renewcommand\footrule{%
+
+ \color{\corcaps}\noindent\makebox[\linewidth]{\rule{\paperwidth}{1pt}}
+}
+
+      %\renewcommand\headrule{%
+
+ %\color{\corcaps}\noindent\makebox[\linewidth]{\rule{\paperwidth}{1pt}}
+%}
+        %\fancyhead[LO]{\bfseries}
+        \fancyfoot[RO]{\bfseries Página \thepage \ de \pageref*{LastPage}}
+    %\fancyhead[RO]{\bfseries \nouppercase \leftmark}
+    }
+    
+\fancypagestyle{MyFancy}{%              
+\fancyhf{}
+%\renewcommand{\subsectionmark}[1]{%
+  %\markright{\MakeUppercase{\thesubsection\ \ \ \ #1 }}}
+  %\renewcommand{\chaptermark}[1]{\markboth{##1}{}}
+  %\renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1}}
+  %\renewcommand{\headrulewidth}{0.7pt}
+  \renewcommand{\sectionmark}[1]{ \markright{ ##1}}
+  \renewcommand\headrule{%
+
+ \color{\corcaps}\noindent\makebox[\linewidth]{\rule{\paperwidth}{1pt}}
+}
+  \renewcommand\footrule{%
+
+ \color{\corcaps}\noindent\makebox[\linewidth]{\rule{\paperwidth}{1pt}}
+}
+	%\fancyhead[RO]{\bfseries \rightmark}
+	%\fancyhead[LO]{\bfseries \nouppercase{\thesubsection} }
+    \fancyhead[RO]{\bfseries \nouppercase{\rightmark}  
+    }
+    \fancyfoot[RO]{\bfseries Página \thepage \ de \pageref*{LastPage}}
+    \fancyfoot[LO]{\bfseries }
+    %\fancyhead[RO]{\bfseries \nouppercase \leftmark}
+    }
+\addtocounter{page}{9}
+\pagestyle{MyFancy}
+
+\color{gal}
+\chapter*{Introdução}\addcontentsline{toc}{chapter}{Introdução}\markboth{Introdução}{Introdução}
+\label{cap:intReal}
+
+
+
+\PlaceText{69mm}{35mm}{ \color{gal}\noindent\makebox[\linewidth]{\rule{2\paperwidth}{1pt}}}
+
+\PlaceText{69mm}{63mm}{ \color{gal}\noindent\makebox[\linewidth]{\rule{2\paperwidth}{1pt}}}
+
+\PlaceText{15mm}{12mm}{ \color{white}\noindent\makebox[\linewidth]{\rule{2\paperwidth}{10pt}}}
+
+\iffalse
+\color{red}
+
+\begin{todolist}
+
+\boldmath
+    % pra marcar o item como feito é só colocar \item[\done]
+    \bf{
+    %\item[\done] ainda não feito
+        \item[\done] terminar resumo
+        \item[\done] palavras-chave
+	\item[\done] terminar a introdução
+	\item[\done] terminar de arrumar as referências
+	\item arrumar pontuação das equações
+	}
+\end{todolist}
+
+
+
+
+\fi
+
+\color{black}
+\lettrine[nindent=2em,lines=1]{E}m geral, ...
