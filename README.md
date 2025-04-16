@@ -1,6 +1,17 @@
 # Template para Dissertação de Mestrado da UnB
 
 Este repositório contém um template para dissertação de mestrado da Universidade de Brasília (UnB). Abaixo estão descrições detalhadas dos arquivos `.tex` e como modificá-los para atender a necessidades específicas.
+## Download Direto
+
+Para obter a versão mais recente deste template, você pode:
+
+1. Baixar o arquivo ZIP diretamente através do link:  
+  [TemplateDissertacaoUnB-main.zip](https://github.com/SaganGromov/TemplateDissertacaoUnB/archive/refs/heads/main.zip)
+
+2. Ou clonar o repositório via Git:
+  ```bash
+  git clone https://github.com/SaganGromov/TemplateDissertacaoUnB.git
+  ```
 
 ---
 
