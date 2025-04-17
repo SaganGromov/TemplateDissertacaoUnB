@@ -6,7 +6,7 @@ Este repositório contém um template para dissertação de mestrado da Universi
 Para obter a versão mais recente deste template, você pode:
 
 1. Baixar o arquivo ZIP diretamente através do link:  
-  [TemplateDissertacaoUnB-main.zip](https://github.com/SaganGromov/TemplateDissertacaoUnB/archive/refs/heads/main.zip)
+  [TemplateDissertacaoUnB-master.zip](https://github.com/SaganGromov/TemplateDissertacaoUnB/archive/refs/heads/master.zip)
 
 2. Ou clonar o repositório via Git:
   ```bash
