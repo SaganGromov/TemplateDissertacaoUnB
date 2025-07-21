@@ -7,17 +7,37 @@
 \fancyhf{}
 %\renewcommand{\subsectionmark}[1]{%
   %\markright{\MakeUppercase{\thesubsection\ \ \ \ #1 }}}
+  %\renewcommand{\chaptermark}[1]{\markboth{teste ##1}{}}
+  %\renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1}}
+  %\renewcommand{\headrulewidth}{0.7pt}
+    %\fancyhead[LO]{\bfseries  \nouppercase{CAPÍTULO \thechapter}  }
+        \fancyfoot[RO]{\bfseries Página \thepage \ de \pageref*{LastPage}}
+    %\fancyhead[RO]{\bfseries \nouppercase \leftmark}
+    }
 
 \fancypagestyle{MyFancy}{%              
 \fancyhf{}
 %\renewcommand{\subsectionmark}[1]{%
   %\markright{\MakeUppercase{\thesubsection\ \ \ \ #1 }}}
+  %\renewcommand{\chaptermark}[1]{\markboth{##1}{}}
+  %\renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1}}
+  %\renewcommand{\headrulewidth}{0.7pt}
+  \renewcommand{\sectionmark}[1]{ \markright{ ##1}}
+  \renewcommand\headrule{%
+
  \color{\corcaps}\noindent\makebox[\linewidth]{\rule{\paperwidth}{1pt}}
 }
   \renewcommand\footrule{%
+
  \color{\corcaps}\noindent\makebox[\linewidth]{\rule{\paperwidth}{1pt}}
 }
-    %\fancyhead[RO]{\bfseries \rightmark}
+	%\fancyhead[RO]{\bfseries \rightmark}
+	\fancyhead[LO]{\bfseries \nouppercase{\thesubsection} }
+    \fancyhead[RO]{\bfseries \nouppercase{\rightmark}  
+    }
+    \fancyfoot[RO]{\bfseries Página \thepage \ de \pageref*{LastPage}}
+    %\fancyfoot[LO]{\bfseries CAPÍTULO \thechapter}
+    %\fancyhead[RO]{\bfseries \nouppercase \leftmark}
     }
 \pagestyle{MyFancy}
 \color{gal}
