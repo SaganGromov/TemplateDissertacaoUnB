@@ -19,9 +19,9 @@ Para obter a versão mais recente deste template, você pode:
 
 ### Imagens 
 
-![Imagem da Dissertação](./ex1.jpg)
+![Imagem da Dissertação](./ex3.png)
 
-![Imagem da Dissertação](./ex2.png)
+![Imagem da Dissertação](./ex4.png)
 
 ### Arquivos Principais
 
