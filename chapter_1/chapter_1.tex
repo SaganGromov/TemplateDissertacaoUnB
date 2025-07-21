@@ -22,7 +22,8 @@
   %\renewcommand{\chaptermark}[1]{\markboth{##1}{}}
   %\renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1}}
   %\renewcommand{\headrulewidth}{0.7pt}
-  \renewcommand{\sectionmark}[1]{ \markright{ ##1}}
+  \color{gal}
+  \renewcommand{\sectionmark}[1]{ \markright{\textcolor{gal}{##1}}}
   \renewcommand\headrule{%
 
  \color{\corcaps}\noindent\makebox[\linewidth]{\rule{\paperwidth}{1pt}}
@@ -32,10 +33,9 @@
  \color{\corcaps}\noindent\makebox[\linewidth]{\rule{\paperwidth}{1pt}}
 }
 	%\fancyhead[RO]{\bfseries \rightmark}
-	\fancyhead[LO]{\bfseries \nouppercase{\thesubsection} }
-    \fancyhead[RO]{\bfseries \nouppercase{\rightmark}  
-    }
-    \fancyfoot[RO]{\bfseries Página \thepage \ de \pageref*{LastPage}}
+	\fancyhead[LO]{\textcolor{gal}{\bfseries \nouppercase{\thesubsection} }}
+    \fancyhead[RO]{\textcolor{gal}{\bfseries \nouppercase{\rightmark}}}
+    \fancyfoot[RO]{\textcolor{gal}{\bfseries Página \thepage \ de \pageref*{LastPage}}}
     %\fancyfoot[LO]{\bfseries CAPÍTULO \thechapter}
     %\fancyhead[RO]{\bfseries \nouppercase \leftmark}
     }
@@ -59,6 +59,8 @@
 \PlaceText{69mm}{79mm}{ \color{gal}\noindent\makebox[\linewidth]{\rule{2\paperwidth}{1pt}}}
 
 \color{black}
+
+
 The purpose of this chapter is to establish the foundational concepts, notations, and conventions that will be used throughout this work. While we aim to make the exposition as self-contained as possible, some familiarity with basic concepts in Riemannian geometry and differentiable manifolds is assumed. Below, we provide a brief overview of the key ideas.
 
 \section{Riemannian Manifolds}
