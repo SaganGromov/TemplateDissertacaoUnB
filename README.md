@@ -1,6 +1,6 @@
 # Template para Dissertação de Mestrado da UnB
 
-Este repositório contém um template para dissertação de mestrado da Universidade de Brasília (UnB). Abaixo estão descrições detalhadas dos arquivos `.tex` e como modificá-los para atender a necessidades específicas.
+Este repositório contém um template para dissertação de mestrado/teses de doutorado da Universidade de Brasília (UnB). Abaixo estão descrições detalhadas dos arquivos `.tex` e como modificá-los para atender a necessidades específicas.
 ## Download Direto
 
 Para obter a versão mais recente deste template, você pode:
