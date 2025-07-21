@@ -17,6 +17,12 @@ Para obter a versão mais recente deste template, você pode:
 
 ## Estrutura do Template
 
+### Imagens 
+
+![Imagem da Dissertação](./ex1.jpg)
+
+![Imagem da Dissertação](../Downloads/ex2.png)
+
 ### Arquivos Principais
 
 1. **`thesis.tex`**  
