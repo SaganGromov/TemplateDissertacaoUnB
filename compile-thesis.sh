@@ -1,87 +1,85 @@
-#!/bin/bash
-# A script to compile the PhD Thesis - Krishna Kumar 
-# Distributed under GPLv2.0 License
+#!/usr/bin/env bash
+set -euo pipefail
 
-compile="compile";
-clean="clean";
+readonly DEFAULT_FILENAME="thesis"
+readonly COMMAND="${1:-}"
+readonly FILENAME="${2:-$DEFAULT_FILENAME}"
 
-if test -z "$2"
-then
-if [ $1 = $clean ]; then
-	echo "Cleaning please wait ..."
-	rm -f *~
-	rm -rf *.aux
-	rm -rf *.bbl
-	rm -rf *.blg
-	rm -rf *.d
-	rm -rf *.fls
-	rm -rf *.ilg
-	rm -rf *.ind
-	rm -rf *.toc*
-	rm -rf *.lot*
-	rm -rf *.lof*
-	rm -rf *.log
-	rm -rf *.idx
-	rm -rf *.out*
-	rm -rf *.nlo
-	rm -rf *.nls
-	rm -rf $filename.pdf
-	rm -rf $filename.ps
-	rm -rf $filename.dvi
-	rm -rf *#* 
-	echo "Cleaning complete!"
-	exit
-else
-	echo "Shell script for compiling the PhD Thesis"
-	echo "Usage: sh ./compile-thesis.sh [OPTIONS] [filename]"
-	echo "[option]  compile: Compiles the PhD Thesis"
-	echo "[option]  clean: removes temporary files no filename required"
-	exit
-fi
-fi
+usage() {
+  cat <<'USAGE'
+Usage:
+  ./compile-thesis.sh compile [filename]
+  ./compile-thesis.sh clean [filename]
 
-filename=$2;
+Arguments:
+  filename  Main .tex file without extension. Defaults to "thesis".
+USAGE
+}
 
-if [ $1 = $clean ]; then
-	echo "Cleaning please wait ..."
-	rm -f *~
-	rm -rf *.aux
-	rm -rf *.bbl
-	rm -rf *.blg
-	rm -rf *.d
-	rm -rf *.fls
-	rm -rf *.ilg
-	rm -rf *.ind
-	rm -rf *.toc*
-	rm -rf *.lot*
-	rm -rf *.lof*
-	rm -rf *.log
-	rm -rf *.idx
-	rm -rf *.out*
-	rm -rf *.nlo
-	rm -rf *.nls
-	rm -rf $filename.pdf
-	rm -rf $filename.ps
-	rm -rf $filename.dvi
-	rm -rf *#* 
-	echo "Cleaning complete!"
-	exit
-elif [ $1 = $compile ]; then
-	echo "Compiling your PhD Thesis...please wait...!"
-	pdflatex -interaction=nonstopmode $filename.tex
-	bibtex $filename.aux 	
-	makeindex $filename.aux
-	makeindex $filename.idx
-	makeindex $filename.nlo -s nomencl.ist -o $filename.nls
-	pdflatex -interaction=nonstopmode $filename.tex
-	makeindex $filename.nlo -s nomencl.ist -o $filename.nls
-	pdflatex -interaction=nonstopmode $filename.tex
-	echo "Success!"
-	exit
-fi
+require_source() {
+  if [[ ! -f "$FILENAME.tex" ]]; then
+    echo "Error: '$FILENAME.tex' was not found." >&2
+    exit 1
+  fi
+}
 
+clean_auxiliary_files() {
+  find . -type f \( \
+    -name '*~' \
+    -o -name '*.aux' \
+    -o -name '*.bbl' \
+    -o -name '*.blg' \
+    -o -name '*.d' \
+    -o -name '*.fls' \
+    -o -name '*.fdb_latexmk' \
+    -o -name '*.ilg' \
+    -o -name '*.ind' \
+    -o -name '*.idx' \
+    -o -name '*.lof' \
+    -o -name '*.log' \
+    -o -name '*.lot' \
+    -o -name '*.nlo' \
+    -o -name '*.nls' \
+    -o -name '*.out' \
+    -o -name '*.synctex.gz' \
+    -o -name '*.toc' \
+    -o -name '*-converted-to.pdf' \
+  \) -delete
+}
 
-if test -z "$3"
-then
-	exit
-fi
+compile_thesis() {
+  require_source
+
+  echo "Compiling $FILENAME.tex..."
+  pdflatex -interaction=nonstopmode "$FILENAME.tex"
+  if grep -q '\\bibdata' "$FILENAME.aux"; then
+    bibtex "$FILENAME.aux"
+  else
+    echo "Skipping BibTeX: no bibliography database declared in $FILENAME.aux"
+  fi
+  makeindex "$FILENAME.idx"
+  makeindex "$FILENAME.nlo" -s nomencl.ist -o "$FILENAME.nls" || true
+  pdflatex -interaction=nonstopmode "$FILENAME.tex"
+  makeindex "$FILENAME.nlo" -s nomencl.ist -o "$FILENAME.nls" || true
+  pdflatex -interaction=nonstopmode "$FILENAME.tex"
+  echo "Wrote $FILENAME.pdf"
+}
+
+case "$COMMAND" in
+  compile)
+    compile_thesis
+    ;;
+  clean)
+    echo "Cleaning LaTeX auxiliary files..."
+    clean_auxiliary_files
+    echo "Cleaning complete."
+    ;;
+  -h|--help|help|"")
+    usage
+    ;;
+  *)
+    echo "Error: unknown command '$COMMAND'." >&2
+    usage >&2
+    exit 1
+    ;;
+esac

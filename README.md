@@ -1,167 +1,162 @@
 # Template para Dissertação de Mestrado da UnB
 
-Este repositório contém um template para dissertação de mestrado/teses de doutorado da Universidade de Brasília (UnB). Abaixo estão descrições detalhadas dos arquivos `.tex` e como modificá-los para atender a necessidades específicas.
-## Download Direto
+Template LaTeX para dissertações de mestrado e teses de doutorado da Universidade de Brasília (UnB), baseado no modelo `PhDThesisPSnPDF`.
 
-Para obter a versão mais recente deste template, você pode:
+![Prévia da dissertação](docs/images/ex3.png)
 
-1. Baixar o arquivo ZIP diretamente através do link:  
-  [TemplateDissertacaoUnB-master.zip](https://github.com/SaganGromov/TemplateDissertacaoUnB/archive/refs/heads/master.zip)
+![Prévia da capa](docs/images/ex4_upscayl_4x_ultrasharp-4x.png)
 
-2. Ou clonar o repositório via Git:
-  ```bash
-  git clone https://github.com/SaganGromov/TemplateDissertacaoUnB.git
-  ```
+## Download
 
----
+Baixe o ZIP mais recente:
 
-## Estrutura do Template
+```text
+https://github.com/SaganGromov/TemplateDissertacaoUnB/archive/refs/heads/main.zip
+```
 
-### Imagens 
+Ou clone o repositório:
 
-![Imagem da Dissertação](./ex3.png)
+```bash
+git clone https://github.com/SaganGromov/TemplateDissertacaoUnB.git
+cd TemplateDissertacaoUnB
+```
 
-![Imagem da Dissertação](./ex4_upscayl_4x_ultrasharp-4x.png)
+## Requisitos
 
-### Arquivos Principais
+Instale uma distribuição LaTeX com `pdflatex`, `bibtex` e `makeindex`. No Linux, uma instalação TeX Live completa costuma ser suficiente.
 
-1. **`thesis.tex`**  
-   Este é o arquivo principal que compila toda a dissertação. Ele inclui os capítulos, preâmbulo e configurações gerais.  
-   - **Modificações principais**:
-     - Para alterar o estilo de referências cruzadas (ex.: equações, teoremas), edite as definições de `\crefname` e `\creflabelformat` neste arquivo.
-     - Para adicionar ou remover capítulos, modifique os comandos `\include{}`.
+Para verificar as ferramentas:
 
-2. **`thesis-info.tex`**  
-   Contém informações de autoria, título, orientador, coorientador, data, e outros metadados.  
-   - **Modificações principais**:
-     - Edite este arquivo para personalizar as informações de autoria e título da dissertação.
+```bash
+pdflatex --version
+bibtex --version
+makeindex --version
+```
 
-3. **`PhDThesisPSnPDF.cls`**  
-   Este arquivo define o estilo do documento.  
-   - **Modificações principais**:
-     - Para alterar as barras horizontais pretas acima e abaixo do título, edite a partir da linha 922.
-     - Para ajustar margens, fontes ou outros estilos globais, modifique este arquivo.
+## Compilação
 
-4. **`pref/pref.tex`**  
-   Contém o prefácio da dissertação.  
-   - **Modificações principais**:
-     - Edite este arquivo para adicionar um prefácio personalizado.
+O arquivo principal é `thesis.tex`.
 
-5. **`acknowledgement/acknowledgement.tex`**  
-   Contém os agradecimentos.  
-   - **Modificações principais**:
-     - Personalize este arquivo para incluir agradecimentos específicos.
+Compile com o script:
 
-6. **`abstract/abstract.tex`**  
-   Contém o resumo/abstract da dissertação.  
-   - **Modificações principais**:
-     - Edite este arquivo para adicionar o resumo em português e/ou inglês.
+```bash
+./compile-thesis.sh compile
+```
 
-7. **`preamble/preamble.tex`**  
-   Contém configurações gerais, como pacotes e comandos personalizados.  
-   - **Modificações principais**:
-     - Adicione ou remova pacotes conforme necessário.
-     - Defina comandos personalizados para uso em toda a dissertação.
+Ou informe outro arquivo principal, sem a extensão `.tex`:
 
-8. **`assets/codigo_segunda_pagina/sec.tex`**  
-   Este arquivo é usado para compilar a segunda página da dissertação, que geralmente contém informações institucionais e de apresentação.  
-   - **Modificações principais**:
-     - Edite este arquivo para personalizar o conteúdo da segunda página, como título, autor, data e membros da banca.
-     - Certifique-se de que ele está incluído corretamente no arquivo `thesis.tex` com o comando:
-       ```tex
-       \includepdf[pages=1, pagecommand={{}}]{assets/codigo_segunda_pagina/sec.pdf}
-       ```
+```bash
+./compile-thesis.sh compile thesis
+```
 
----
+Também é possível usar o Makefile:
 
-## Capítulos e Seções
+```bash
+make
+```
 
-Os capítulos estão organizados em subdiretórios e podem ser incluídos ou removidos no arquivo `thesis.tex` usando o comando `\include{}`.
+Para remover arquivos auxiliares gerados pela compilação:
 
----
+```bash
+./compile-thesis.sh clean
+```
 
-## Instruções para Incluir Teoremas, Observações e Outros Elementos
+## Estrutura
 
-Os estilos para teoremas, observações, definições e outros elementos estão definidos nos arquivos `preamble/preamble.tex`, `preamble/config.tex` e `preamble/notation.tex`. Abaixo estão exemplos de como utilizá-los:
+```text
+.
+├── thesis.tex                         # Arquivo principal
+├── thesis-info.tex                    # Título, autor, orientador, data e metadados
+├── preamble/
+│   ├── preamble.tex                   # Pacotes e ajustes gerais do template
+│   ├── config.tex                     # Idioma, teoremas e comandos do trabalho
+│   └── notation.tex                   # Notação matemática personalizada
+├── abstract/abstract.tex              # Resumo e abstract
+├── acknowledgement/acknowledgement.tex# Agradecimentos
+├── dedication/dedication.tex          # Dedicatória
+├── introduction/intro.tex             # Introdução
+├── chapter_1/chapter_1.tex            # Capítulo 1
+├── chapter_2/chapter_2.tex            # Capítulo 2
+├── pref/0.pref.tex                    # Prefácio opcional
+├── assets/codigo_segunda_pagina/      # Fonte e PDF da segunda página
+├── creditos/                          # Instruções em PDF incluídas no início
+├── figs/                              # Brasões e figuras usadas pelo template
+├── material/                          # PDFs de apoio e referências locais
+├── docs/images/                       # Imagens usadas nesta documentação
+└── hooks/                             # Hooks Git opcionais
+```
 
-### Teoremas
-Para incluir um teorema, utilize o ambiente `teorema`:
+## Personalização Básica
+
+Edite `thesis-info.tex` para alterar título, autor, orientador, grau, data, assunto e palavras-chave.
+
+Adicione ou remova capítulos em `thesis.tex`, na seção `Main Matter`:
+
+```tex
+\include{introduction/intro}
+\include{chapter_1/chapter_1}
+\include{chapter_2/chapter_2}
+```
+
+Se quiser usar o prefácio, descomente:
+
+```tex
+\include{pref/0.pref}
+```
+
+## Páginas Pré-Textuais
+
+O PDF principal inclui dois PDFs prontos antes da dedicatória:
+
+```tex
+\includepdf[pages=-, pagecommand={}]{creditos/creditos.pdf}
+\includepdf[pages=1, pagecommand={}]{assets/codigo_segunda_pagina/sec.pdf}
+```
+
+Para remover as instruções do PDF final, comente a linha de `creditos/creditos.pdf` em `thesis.tex`.
+
+Para alterar a segunda página, edite os arquivos em `assets/codigo_segunda_pagina/` e recompile o PDF correspondente antes de compilar `thesis.tex`.
+
+## Ambientes Matemáticos
+
+Os ambientes estão definidos em `preamble/config.tex`.
+
 ```tex
 \begin{teorema}
-Seja $\mm^3$ uma variedade diferenciável fechada. Então $\mm^3$ é homeomorfa a $\mathbb{S}^3$.
+Seja $\mm^3$ uma variedade diferenciável fechada.
 \end{teorema}
-```
 
-### Observações
-Para incluir uma observação, utilize o ambiente `oobs`:
-```tex
 \begin{oobs}
-Este resultado é uma consequência direta do Teorema de Poincaré.
+Este resultado é uma consequência direta do teorema anterior.
 \end{oobs}
-```
 
-### Definições
-Para incluir uma definição, utilize o ambiente `deff`
-```tex
 \begin{deff}
-Uma métrica Riemanniana é uma função que associa a cada ponto de uma variedade um produto interno no espaço tangente.
+Uma métrica Riemanniana associa um produto interno a cada espaço tangente.
 \end{deff}
 ```
 
-### Proposições
-Para incluir uma proposição, utilize o ambiente `proposicao`:
-```tex
-\begin{proposicao}
-Sejam $a, b \in \mathbb{R}$. Então $a + b = b + a$.
-\end{proposicao}
+Ambientes disponíveis incluem `teorema`, `oobs`, `deff`, `proposicao`, `lema`, `col`, `pergunta` e `exem`.
+
+## Notação
+
+Comandos de notação ficam em `preamble/notation.tex`. Exemplos:
+
+- `\KN`: produto de Kulkarni-Nomizu
+- `\divv`: divergência
+- `\Scal`: curvatura escalar
+- `\Ric`: curvatura de Ricci
+- `\Rm`: curvatura Riemanniana
+
+## Hooks Git
+
+Os hooks em `hooks/` são opcionais. Para instalá-los:
+
+```bash
+./hooks/install.sh
 ```
 
-### Lemas
-Para incluir um lema, utilize o ambiente `lema`:
-```tex
-\begin{lema}
-Se $f$ é uma função contínua em um intervalo fechado, então $f$ é limitada.
-\end{lema}
-```
+O hook `pre-commit` recompila `thesis.pdf` quando arquivos relevantes são adicionados ao commit.
 
-### Corolários
-Para adicionar um corolário, utilize o ambiente `col`:
-```tex
-\begin{col}
-Se $\mm^3$ é simplesmente conexa e compacta, então $\mm^3$ é homeomorfa a $\mathbb{S}^3$.
-\end{col}
-```
+## Observações
 
-### Perguntas
-Para incluir uma pergunta, utilize o ambiente `pergunta`:
-```tex
-\begin{pergunta}
-Quais são todas as topologias possíveis de uma superfície compacta?
-\end{pergunta}
-```
-
-### Exemplos
-Para adicionar um exemplo, utilize o ambiente `exem`:
-```tex
-\begin{exem}
-O toro $\mathbb{T}^2 = \mathbb{S}^1 \times \mathbb{S}^1$ é um exemplo de uma superfície compacta.
-\end{exem}
-```
-
----
-
-## Personalização de Notação
-
-Os comandos personalizados para notação matemática estão definidos em `preamble/notation.tex`. Exemplos de comandos disponíveis:
-
-- **Produto de Kulkarni-Nomizu**: `\KN`
-- **Divergência**: `\divv`
-- **Curvatura Escalar**: `\Scal`
-- **Ricci**: `\Ric`
-- **Curvatura Riemanniana**: `\Rm`
-
-Exemplo de uso:
-```tex
-A curvatura escalar é denotada por $\Scal$, enquanto a curvatura de Ricci é $\Ric$.
-```
-
+O repositório mantém `thesis.pdf` versionado como prévia compilada. Arquivos auxiliares de LaTeX, como `.aux`, `.log`, `.toc`, `.out`, `.idx`, `.nlo` e `.nls`, são ignorados pelo Git.

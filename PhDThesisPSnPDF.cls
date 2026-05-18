@@ -35,7 +35,7 @@
 \newif\ifsetFont\setFontfalse                 % Font is not set
 
 \newif\ifPHD@times\PHD@timesfalse             % Times with Math Support
-\DeclareOption{lmodern}{
+\newcommand{\PHD@setTimesFont}{%
   \ifsetFont
     \ClassWarning{PhDThesisPSnPDF}{Font selection conflict: A font package was
       already specified. Please check the document class options in case you
@@ -45,6 +45,8 @@
     \setFonttrue
   \fi
 }
+\DeclareOption{times}{\PHD@setTimesFont}
+\DeclareOption{lmodern}{\PHD@setTimesFont}
 
 \newif\ifPHD@fourier\PHD@fourierfalse         % Fourier with Math Support
 \DeclareOption{fourier}{
@@ -1309,4 +1311,3 @@ wish to left align your text}
 			- \totalheightof{\usebox{\PHD@collegedate}}
 }
 }
-
