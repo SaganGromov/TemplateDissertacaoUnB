@@ -1,0 +1,273 @@
+% Configure the document math mode and theorems style.
+
+% Comente se o trabalho for escrito em inglês
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+%\usepackage[portuguese]{babel}
+\usepackage[brazil]{babel}
+\addto{\captionsbrazil}{%
+    \renewcommand{\bibname}{Bibliografia}%
+    \renewcommand{\contentsname}{Sumário}}
+\listfiles
+%Use this workaround the appendix error with portuguese language
+\usepackage{etoolbox}
+\makeatletter
+\appto{\appendices}{\def\Hy@chapapp{Appendix}}
+\makeatother
+
+%Math Packages - General
+\usepackage{amsmath,amsthm,amssymb,amsfonts,amscd, amsbsy,mathtools}
+\usepackage{wasysym}
+
+
+
+
+
+%Include external PDF files
+\usepackage{pdfpages}
+
+
+% Logic
+\usepackage{bussproofs}
+
+%\everymath{\displaystyle}
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+
+%Pacotes de Documento
+\usepackage{faktor} %Por exemplo, faktor é muito útil para escrever quocientes.
+% Para mais informações veja:
+% https://ctan.org/pkg/faktor?lang=en
+
+
+
+%Ambientes Comuns - Inglês
+%\theoremstyle{definition}\newtheorem{definition}{Definition}[chapter]
+%\newtheorem{example}{Example}[chapter]
+%\newtheorem{lemma}{Lemma}[chapter]
+%\newtheorem{theorem}{Theorem}[chapter]
+%\newtheorem{proposition}{Proposition}[chapter]
+%\newtheorem{col}{Corollary}[chapter]
+%\theoremstyle{remark}\newtheorem{remark}{Remark}[chapter]
+
+% Ambientes Comuns - Português
+%\theoremstyle{definition}\newtheorem{definicao}{Definição}[chapter]
+
+
+
+\usepackage{amsthm}
+\usepackage{pifont} 
+
+
+\newcommand{\FRASE}[2]{\epigraph{\large\textit{#1}}{\textbf{#2\\}}}
+
+
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+
+\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
+\hspace{-2.5pt}}
+\newcommand{\wontfix}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}
+
+\definecolor{navybluegalaxy}{RGB}{0, 36, 93}
+\definecolor{targ1}{RGB}{201,75,75}
+\definecolor{targ2}{RGB}{60,44,44}
+\definecolor{targ3}{RGB}{229,65,65}
+\definecolor{targ4}{RGB}{111,68,81}
+\definecolor{gold}{RGB}{255,210,0}
+\definecolor{gal}{RGB}{0, 7, 111}
+
+\newcommand{\corcaps}{gal}  
+\newcommand{\COR}{navybluegalaxy}
+
+
+\let\oldcitep=\citep 
+\renewcommand{\citet}[1]{\textcolor{teal}{\oldcitet{#1}}}
+\renewcommand{\citep}[1]{\textcolor{teal}{\oldcitep{#1}}}
+
+
+
+
+\newcommand{\om}{\mathbb{M}}
+\newcommand{\emvioleta}[1]{\textbf{\textcolor{violet}{#1}}}
+\newcommand{\jps}[1]{\textcolor{blue}{#1}}
+\newcommand{\bl}[1]{\textnormal{\textcolor{black}{#1}}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\white}[1]{\textcolor{white}{#1}}
+\newcommand{\pur}[1]{\textcolor{purple}{#1}}
+\newcommand{\maggg}[1]{\textcolor{magenta}{#1}}
+
+\newcommand{\kozul}[4]{
+\begin{aligned}
+2 g(\nabla_{#1} #2, #3) &= #1(g(#2, #3)) + #2(g(#1, #3)) - #3(g(#1, #2)) \\ 
+ &- g([#2, #1], #3) - g([#1, #3], #2) - g([#2, #3], #1) \\
+ &#4
+ \end{aligned}
+}
+
+\newcommand\cl[2]{\color{#1}{#2}}
+\newcommand\bcl[2]{\color{#1}{{\fontseries{b}\selectfont #2}}}
+
+%\usepackage{color}
+%\definecolor{SAEblue}{rgb}{0, .62, .91}
+%\renewcommand\theequation{\red{{\arabic{equation}}}}
+
+
+\makeatletter
+\let\mytagform@=\tagform@
+\def\tagform@#1{\maketag@@@{\bfseries\jps{(\ignorespaces#1\unskip\@@italiccorr)}}\hspace{3mm}}
+\renewcommand{\eqref}[1]{\textup{\mytagform@{\ref{#1}}}}
+\makeatother
+
+\renewcommand{\div}{\divv}
+\usepackage[LGR,T1]{fontenc}
+\newcommand{\textgreek}[1]{\begingroup\fontencoding{LGR}\selectfont#1\endgroup}
+
+
+\newcommand{\KN}{\mathbin{\bigcirc\mspace{-15mu}\wedge\mspace{4mu}}}
+\theoremstyle{theorem}\newtheorem{obs}{Observação}[chapter]
+\renewcommand{\qedsymbol}{\rule{0.7em}{0.7em}}
+\newenvironment{demm}{\smallskip \noindent{\bf \underline{Demonstração:}}}
+{\begin{flushright} $\qedsymbol$\end{flushright}\smallskip}
+
+\newenvironment{demm41}{\smallskip \noindent{\bf \underline{Demonstração do Teorema \cref{maxxnumeig}:}}}
+{\begin{flushright} $\qedsymbol$\end{flushright}\smallskip}
+
+
+\newenvironment{demm42}{\smallskip \noindent{\bf \underline{Demonstração do Teorema \cref{localstruc}:}}}
+{\begin{flushright} $\qedsymbol$\end{flushright}\smallskip}
+
+
+\newtheoremstyle{theoremdd}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {1pt}% measure of space to indent
+  {\bfseries\color{violet}}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\underline{\thmname{#1} (\thmnumber{O.#2})\textbf{\thmnote{ (#3)}.}}}
+
+
+  
+\theoremstyle{theoremdd}
+\newtheorem{oobs}{Observação}
+
+\newtheoremstyle{theorempergunta}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {1pt}% measure of space to indent
+  {\bfseries\color{gal}}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\underline{\thmname{#1} (\thmnumber{P.#2})\textbf{\thmnote{ (#3)}.}}}
+
+
+\theoremstyle{theorempergunta}
+\newtheorem{pergunta}{Pergunta}
+
+\newtheoremstyle{theoremconjec}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {1pt}% measure of space to indent
+  {\bfseries\color{gal}}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\underline{\thmname{#1.} \thmnumber{}\textbf{\thmnote{}}}}
+
+\theoremstyle{theoremconjec}
+\newtheorem{conjec}{A conjectura da geometrização de Thurston}
+
+\newtheoremstyle{theoremEX}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {1pt}% measure of space to indent
+  {\bfseries\color{BlueViolet}}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\underline{\thmname{#1} (\thmnumber{E.#2})\textbf{\thmnote{ (#3)}.}}}
+
+\theoremstyle{theoremEX}
+\newtheorem{exem}{Exemplo}[chapter]
+
+\theoremstyle{theoremNormal}
+
+
+
+
+
+\newtheoremstyle{theoremDEF}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {1pt}% measure of space to indent
+  {\bfseries\color{cyan}}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\underline{\thmname{#1} (\thmnumber{D.#2})\textbf{\thmnote{ (#3)}.}}}
+
+\theoremstyle{theoremDEF}
+\newtheorem{deff}{Definição}[chapter]
+
+\newtheoremstyle{theoremPROP}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {1pt}% measure of space to indent
+  {\bfseries\color{Sepia}}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\underline{\thmname{#1} (\thmnumber{P.#2})\textbf{\thmnote{ (#3)}.}}}
+
+\theoremstyle{theoremPROP}
+\newtheorem{proposicao}{Proposição}[chapter]
+
+\newtheoremstyle{theoremLEM}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {1pt}% measure of space to indent
+  {\bfseries\color{navybluegalaxy}}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\underline{\thmname{#1} (\thmnumber{L.#2})\textbf{\thmnote{ (#3)}.}}}
+
+\theoremstyle{theoremLEM}
+\newtheorem{lema}{Lema}[chapter]
+
+
+\newtheoremstyle{theoremTEO}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {\itshape}% name of font to use in the body of the theorem
+  {5pt}% measure of space to indent
+  {\bfseries\color{gal}}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\underline{\thmname{#1} (\thmnumber{T.#2})\textbf{\thmnote{ (#3)}.}}}
+  
+
+
+\theoremstyle{theoremTEO}
+\newtheorem{teorema}{Teorema}[chapter]
+
+\newtheoremstyle{theoremCOL}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {\itshape}% name of font to use in the body of the theorem
+  {5pt}% measure of space to indent
+  {\bfseries\color{Aquamarine}}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\underline{\thmname{#1} (\thmnumber{C.#2})\textbf{\thmnote{ (#3)}.}}}
+  
+\theoremstyle{theoremCOL} 
+\newtheorem{col}{Corolário}[chapter]
+\newcommand{\mm}{\mathcal{M}}
+\newcommand{\nn}{\mathcal{N}}
+\renewcommand{\epsilon}{\varepsilon}

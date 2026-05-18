@@ -1,0 +1,138 @@
+%TODO: Make a revision in notation commands, they are very confusing...
+
+% General
+
+
+\DeclareFontFamily{U}{stix2bb}{}
+\DeclareFontShape{U}{stix2bb}{m}{n}{<->stix2-mathbb}{}
+
+\newcommand{\indic}{\text{\usefont{U}{stix2bb}{m}{n}1}}% indicator function
+
+
+\newcommand{\p}{\partial}
+\newcommand{\bee}{\widetilde{\be}}
+\newcommand{\Rmm}[4]{\Rm\parent{#1,#2}#3, #4}
+\newcommand{\segf}{\mathbf{\mathrm{\RNum{2}}}}
+\newcommand{\RNum}[1]{\textbf{\uppercase\expandafter{\romannumeral #1\relax}}}
+\newcommand{\conj}[2]{\{#1 \ \vert \ #2 \}}
+\newcommand{\tioC}[2]{\widetilde{#1}^{#2}}
+\newcommand{\tioB}[2]{\widetilde{#1}_{#2}}
+\newcommand{\Munderbrace}[2]{\begingroup \color{violet} \underbrace{\color{black} #1 }_{\color{violet} #2 } \endgroup}
+\newcommand{\Bunderbrace}[2]{\begingroup \color{gal} \underbrace{\color{black} #1 }_{\color{gal} #2 } \endgroup}
+\newcommand{\Moverbrace}[2]{\begingroup \color{violet} \overbrace{\color{black} #1 }^{\color{violet} #2 } \endgroup}
+\renewcommand{\l}{\ell}
+\renewcommand{\iint}{\mathrm{int}}
+\newcommand{\intprodl}{%
+    \mathbin{\scalebox{1.5}{$\lrcorner$}}%
+}
+\theoremstyle{theoremTEO}
+\newtheorem{thm}{Theorem}[section] 
+\newcommand{\thistheoremname}{}
+\newtheorem{genericthm}[thm]{\thistheoremname}
+\newenvironment{namedthm}[1]
+  {\renewcommand{\thistheoremname}{#1}%
+   \begin{genericthm}}
+  {\end{genericthm}}
+  
+
+\theoremstyle{theoremLEM}
+\newtheorem{generic}[thm]{\thistheoremname}
+\newenvironment{namedlem}[1]
+  {\renewcommand{\thistheoremname}{#1}%
+   \begin{generic}}
+  {\end{generic}}
+  
+
+\newcommand{\bigzero}{\mbox{\normalfont\Large\bfseries 0}}
+\newcommand{\rvline}{\hspace*{-\arraycolsep}\vline\hspace*{-\arraycolsep}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\divv}{\operatorname{div}}
+\newcommand{\RICC}{\operatorname{RICC}}
+\newcommand{\dv}{\operatorname{dVol}_g}
+\newcommand{\ddv}{\widetilde{\operatorname{dVol}_g}}
+\newcommand{\SC}{\operatorname{SC}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\dx}{\mathrm{d}x}
+\newcommand{\dr}{\mathrm{d}r}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\R}{\mathscr{R}}
+\newcommand{\n}{\nabla}
+\newcommand{\W}{\mathscr{W}}
+\newcommand{\Sy}{\mathcal{S}}
+\newcommand{\T}{\mathscr{T}}
+\newcommand{\Endo}{\operatorname{End}}
+\newcommand{\w}{\omega}
+\newcommand{\signature}{\Sigma}             %The signature set.
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\ee}{\mathcal{E}}
+\newcommand{\sop}{\mathcal{S}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\ww}{\mathcal{W}}
+\newcommand{\subs}{\mathcal{S}ub}           %The substitutions set.
+\newcommand{\vars}[1]{\mathtt{vars}(#1)}   %The set of variables.
+\newcommand{\dom}[1]{\mathtt{dom}(#1)}     %The domain.
+\newcommand{\ran}[1]{\mathtt{ran}(#1)}      %The range of a substitution.
+\newcommand{\vran}[1]{\mathtt{v}\ran{#1}}
+
+% Nominal Terms and Equality
+\newcommand{\atomSet}{\mathbb{A}}           %The set of all atoms.
+\newcommand{\var}{\mathbb{X}}               %The set of all META variables.
+\newcommand{\abs}[2]{\left[ #1 \right]#2}   %Abstraction term.
+\newcommand{\support}[1]{\mathtt{supp}(#1)}          %Support of an permutation.
+\newcommand{\permID}{\mathtt{id}}           %Identity permutation.
+\newcommand{\pAction}[2]{#1 \cdot #2}       %The action of a permutation on a term.
+\newcommand{\pGroup}{\mathbb{P}}            %The group of all permutations acting on the set fo atoms.
+\newcommand{\swapping}[2]{(#1 \ \ #2)}      %The Swapping permutation.
+\newcommand{\terms}{T(\signature,\atomSet,\var)}    %In context of nominal this is the set of terms.
+
+\newcommand{\fresh}{\#}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Ric}{\mathrm{Ric}}
+\newcommand{\Rm}{\mathrm{Rm}}
+\newcommand{\Lip}{\mathrm{Lip}}
+\newcommand{\dist}{\mathrm{dist}}
+\newcommand{\Scal}{\mathrm{Scal}}
+
+\newcommand{\secc}{\mathrm{sec}}
+
+\newcommand{\solution}[1]{\mathcal{S}(#1)} %solution set of the problem P
+\newcommand{\ueq}[2]{#1\overset{?}{=}#2} %an unification equational problem
+
+
+%Notation for Equational Unification (general theory)
+
+\newcommand{\sig}[1]{\mathcal{S}ig(#1)} %signature of a set of equations
+
+% #1 The theory, #2 the problem set
+\newcommand{\eqSolution}[2]{\mathcal{U}_{#1}(#2)}
+
+%This defines an command with optional arguments
+% The arguments are:
+%m: mandatory - the theory set of equations name
+%g: optional argument - CONVENTION: SEND 1 TO BE TRUE "?" means that the equation is an E-unfication problem
+\DeclareDocumentCommand\eqUnif{ m g }{%
+	\IfNoValueTF{#2}{=_{#1}}{\overset{?}{=}_{#1}}
+}
+
+%This defines an command with optional arguments
+% The arguments are: #1 - the theory #2 - the variable set
+\DeclareDocumentCommand\iqoless{ O{} O{} }{%
+	\precsim_{#1}^{#2}
+}
+\DeclareDocumentCommand\iqogreater{ O{} O{} }{%
+	\succsim_{#1}^{#2}
+}
+\DeclareDocumentCommand\iqoeq{ O{} O{} }{%
+	\simeq_{#1}^{#2}
+}
+
+\DeclareDocumentCommand\iqoneq{ O{} O{} }{%
+	\npreceq_{#1}^{#2}
+}
+
+
+\DeclareDocumentCommand\csu{ O{}}{%
+	\mathcal{U}_{#1}
+}
+
+\newcommand{\falta}[1]{\textbf{\textcolor{red}{#1}}}

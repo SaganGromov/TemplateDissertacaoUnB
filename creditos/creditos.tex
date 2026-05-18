@@ -1,0 +1,185 @@
+% filepath: /home/sagan/TemplateDissertacaoUnB/README.tex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath, amssymb}
+\usepackage[margin=0.5cm]{geometry}
+\usepackage{pdfpages}
+
+\title{Template para Dissertação de Mestrado da UnB}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Introdução}
+
+Este documento contém instruções para trabalhar com um template para dissertações de mestrado/teses de doutorado da Universidade de Brasília (UnB), que é um fork do \href{https://github.com/deividrvale/unb-thesis-template}{template feito pelo ex-aluno Deivid Vale}. Abaixo estão descrições detalhadas dos arquivos \texttt{.tex} e como modificá-los para atender a necessidades específicas. Para remover essas instruções do PDF principal, remova (ou comente) a linha 253 de \texttt{thesis.tex}, a saber,
+\begin{verbatim}
+\includepdf[pages=-, pagecommand={}]{creditos/creditos.pdf}
+\end{verbatim}
+{\color{blue}\textbf{A versão mais atualizada do repositório pode ser encontrada em:}} \newline 
+\href{https://github.com/SaganGromov/TemplateDissertacaoUnB}{https://github.com/SaganGromov/TemplateDissertacaoUnB}
+\newline\newline
+{\color{blue}\textbf{Download direto da última versão do repositório completo:}} \newline
+\href{https://github.com/SaganGromov/TemplateDissertacaoUnB/archive/refs/heads/main.zip}{https://github.com/SaganGromov/TemplateDissertacaoUnB/archive/refs/heads/main.zip}
+
+
+\section*{Estrutura do Template}
+
+\subsection*{Arquivos Principais}
+
+\begin{enumerate}
+    \item \textbf{\texttt{thesis.tex}}  
+    Este é o arquivo principal que compila toda a dissertação. Ele inclui os capítulos, preâmbulo e configurações gerais.  
+    \begin{itemize}
+        \item Para alterar o estilo de referências cruzadas (ex.: equações, teoremas), edite as definições de \texttt{\textbackslash crefname} e \texttt{\textbackslash creflabelformat} neste arquivo.
+        \item Para adicionar ou remover capítulos, modifique os comandos \texttt{\textbackslash include\{\}}.
+    \end{itemize}
+
+    \item \textbf{\texttt{thesis-info.tex}}  
+    Contém informações de autoria, título, orientador, coorientador, data, e outros metadados.  
+    \begin{itemize}
+        \item Edite este arquivo para personalizar as informações de autoria e título da dissertação.
+    \end{itemize}
+
+    \item \textbf{\texttt{PhDThesisPSnPDF.cls}}  
+    Este arquivo define o estilo do documento.  
+    \begin{itemize}
+        \item Para alterar as barras horizontais pretas acima e abaixo do título, edite a partir da linha 922.
+        \item Para ajustar margens, fontes ou outros estilos globais, modifique este arquivo.
+    \end{itemize}
+
+    \item \textbf{\texttt{pref/pref.tex}}  
+    Contém o prefácio da dissertação.  
+    \begin{itemize}
+        \item Edite este arquivo para adicionar um prefácio personalizado.
+    \end{itemize}
+
+    \item \textbf{\texttt{acknowledgement/acknowledgement.tex}}  
+    Contém os agradecimentos.  
+    \begin{itemize}
+        \item Personalize este arquivo para incluir agradecimentos específicos.
+    \end{itemize}
+
+    \item \textbf{\texttt{abstract/abstract.tex}}  
+    Contém o resumo/abstract da dissertação.  
+    \begin{itemize}
+        \item Edite este arquivo para adicionar o resumo em português e/ou inglês.
+    \end{itemize}
+
+    \item \textbf{\texttt{preamble/preamble.tex}}  
+    Contém configurações gerais, como pacotes e comandos personalizados.  
+    \begin{itemize}
+        \item Adicione ou remova pacotes conforme necessário.
+        \item Defina comandos personalizados para uso em toda a dissertação.
+    \end{itemize}
+
+    \item \textbf{\texttt{assets/codigo\_segunda\_pagina/sec.tex}}  
+    Este arquivo é usado para compilar a segunda página da dissertação, que geralmente contém informações institucionais e de apresentação.  
+    \begin{itemize}
+        \item Edite este arquivo para personalizar o conteúdo da segunda página, como título, autor, data e membros da banca.
+        \item Certifique-se de que ele está incluído corretamente no arquivo \texttt{thesis.tex} com o comando:
+        \begin{verbatim}
+        \includepdf[pages=1, pagecommand={{}}]{assets/codigo_segunda_pagina/sec.pdf}
+        \end{verbatim}
+    \end{itemize}
+\end{enumerate}
+
+\section*{Capítulos e Seções}
+
+Os capítulos estão organizados em subdiretórios separados:
+\begin{itemize}
+    \item \textbf{\texttt{chapter\_1/chapter\_1.tex}} - Primeiro capítulo
+    \item \textbf{\texttt{chapter\_2/chapter\_2.tex}} - Segundo capítulo
+    \item \textbf{\texttt{chapter\_n/chapter\_n.tex}} - Capítulos adicionais
+\end{itemize}
+
+Para incluir ou remover capítulos, modifique os comandos \texttt{\textbackslash include\{\}} no arquivo \texttt{thesis.tex}. Por exemplo:
+\begin{verbatim}
+\include{chapter_1/chapter_1}
+\include{chapter_2/chapter_2}
+\end{verbatim}
+
+Cada capítulo pode conter suas próprias figuras, tabelas e referências bibliográficas locais.
+
+\section*{Instruções para Incluir Teoremas, Observações e Outros Elementos}
+
+Os estilos para teoremas, observações, definições e outros elementos estão definidos nos arquivos \newline \texttt{preamble/preamble.tex}, \texttt{preamble/config.tex} e \texttt{preamble/notation.tex}. Abaixo estão exemplos de como utilizá-los:
+
+\subsection*{Teoremas}
+\begin{verbatim}
+\begin{teorema}
+Seja $\mm^3$ uma variedade diferenciável fechada. Então $\mm^3$ é homeomorfa a $\mathbb{S}^3$.
+\end{teorema}
+\end{verbatim}
+
+\subsection*{Observações}
+\begin{verbatim}
+\begin{oobs}
+Este resultado é uma consequência direta do Teorema de Poincaré.
+\end{oobs}
+\end{verbatim}
+
+\subsection*{Definições}
+\begin{verbatim}
+\begin{deff}
+Uma métrica Riemanniana é uma função que associa a cada ponto de uma variedade um produto interno no espaço tangente.
+\end{deff}
+\end{verbatim}
+
+\subsection*{Proposições}
+\begin{verbatim}
+\begin{proposicao}
+Sejam $a, b \in \mathbb{R}$. Então $a + b = b + a$.
+\end{proposicao}
+\end{verbatim}
+
+\subsection*{Lemas}
+\begin{verbatim}
+\begin{lema}
+Se $f$ é uma função contínua em um intervalo fechado, então $f$ é limitada.
+\end{lema}
+\end{verbatim}
+
+\subsection*{Corolários}
+\begin{verbatim}
+\begin{col}
+Se $\mm^3$ é simplesmente conexa e compacta, então $\mm^3$ é homeomorfa a $\mathbb{S}^3$.
+\end{col}
+\end{verbatim}
+
+\subsection*{Perguntas}
+\begin{verbatim}
+\begin{pergunta}
+Quais são todas as topologias possíveis de uma superfície compacta?
+\end{pergunta}
+\end{verbatim}
+
+\subsection*{Exemplos}
+\begin{verbatim}
+\begin{exem}
+O toro $\mathbb{T}^2 = \mathbb{S}^1 \times \mathbb{S}^1$ é um exemplo de uma superfície compacta.
+\end{exem}
+\end{verbatim}
+
+\section*{Personalização de Notação}
+
+Os comandos personalizados para notação matemática estão definidos em \texttt{preamble/notation.tex}. Exemplos de comandos disponíveis:
+
+\begin{itemize}
+    \item \textbf{Produto de Kulkarni-Nomizu}: \texttt{\textbackslash KN}
+    \item \textbf{Divergência}: \texttt{\textbackslash divv}
+    \item \textbf{Curvatura Escalar}: \texttt{\textbackslash Scal}
+    \item \textbf{Ricci}: \texttt{\textbackslash Ric}
+    \item \textbf{Curvatura Riemanniana}: \texttt{\textbackslash Rm}
+\end{itemize}
+
+Exemplo de uso:
+\begin{verbatim}
+A curvatura escalar é denotada por $\Scal$, enquanto a curvatura de Ricci é $\Ric$.
+\end{verbatim}
+
+\end{document}
